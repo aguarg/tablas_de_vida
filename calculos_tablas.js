@@ -12,22 +12,40 @@ var nx = [996, 668, 295, 190, 176, 172, 167, 159, 154, 147, 105, 22, 0];
 var lx = [];
 
 
+// Resultados de la columna dx:
+var dx = [];
+
+
+
+
 // FUNCIONES:
 // Calcular los valores de la columna lx:
 function calcular_lx(){
 	
 	for (var i = 0; i < nx.length; i++) {
    		
-   		lx.push(nx[i]/nx[0]);
+   		lx.push(nx[i]/nx[0]);  //-----> toFixed() devuelve strings. No usarlo excepto al final, para mostrar los datos en la tabla.
 	}
 
-	console.log(lx)
 	
+	
+}
+
+
+// Calcular los valores de la columna qx:
+function calcular_dx(){
+	for (var i = 0; i < nx.length; i++) {
+   		
+   		dx.push(nx[i] - nx[i + 1]);  
+	}
+
+
 }
 
 
 
 
-console.log(nx)
-calcular_lx()
-//console.log(nx)
+
+
+calcular_dx()
+console.log(dx)
