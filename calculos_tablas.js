@@ -68,16 +68,13 @@ function calcular_Lx(){
 
 }
 
-//NO FUNCIONA!!!!!!!!!!!!
+
 // Calcular los valores de la columna Tx:  Números de días que les queda a los sobrevivientes que alcanzaron edad X:
 function calcular_Tx(){
 	var valor_actual = Lx[Lx.length - 2]; //asignamos el anteúltimo valor (el último es NaN) a valor_actual.
 	
 	Tx.push(valor_actual); //metemos el valor_actual en el arreglo Tx.
-	//HASTA ACÁ ESTA TODO BIEN.
-	
-
-    
+	    
 
 	//esto itera por Lx desde el final, saltando los dos últimos lugares: uno el NaN y el otro el valor_actual. 		
 	for (var i = Lx.length - 2; i >= 0; i--) { 
@@ -88,10 +85,21 @@ function calcular_Tx(){
 	}
 
 
+
 }
 
 
 // Calcular los valores de la columna ex: esperanza media de vida para los organismo al comienzo de la edad X
+function calcular_ex(){
+	//El arreglo Tx está invertido para facilitar la lectura, pero hay que invertirlo para los cálculos:
+	var tx_invertido = Tx.reverse()
+	
+	for (var i = 0; i < nx.length; i++) {
+   		
+   		ex.push(tx_invertido[i + 1] / nx[i]);  
+	}
+
+}
 
 
 
@@ -99,8 +107,8 @@ function calcular_Tx(){
 
 calcular_Lx()
 calcular_Tx()
+calcular_ex()
 
-
-console.log("El arreglo Lx tiene un tamaño de " + Lx.length);
-console.log(Lx)
+console.log(nx)
 console.log(Tx)
+console.log(ex)
