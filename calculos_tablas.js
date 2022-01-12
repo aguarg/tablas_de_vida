@@ -68,14 +68,24 @@ function calcular_Lx(){
 
 }
 
-
+//NO FUNCIONA!!!!!!!!!!!!
 // Calcular los valores de la columna Tx:  Números de días que les queda a los sobrevivientes que alcanzaron edad X:
 function calcular_Tx(){
-	let anteultimo_elemento_de_Lx = Lx[Lx.length - 1];
+	var valor_actual = Lx[Lx.length - 2]; //asignamos el anteúltimo valor (el último es NaN) a valor_actual.
 	
+	Tx.push(valor_actual); //metemos el valor_actual en el arreglo Tx.
+	//HASTA ACÁ ESTA TODO BIEN.
 	
-	
-	
+
+    
+
+	//esto itera por Lx desde el final, saltando los dos últimos lugares: uno el NaN y el otro el valor_actual. 		
+	for (var i = Lx.length - 2; i >= 0; i--) { 
+    	suma = Lx[i-1] + valor_actual;
+    	Tx.push(suma);
+
+    	valor_actual = suma;
+	}
 
 
 }
@@ -89,4 +99,8 @@ function calcular_Tx(){
 
 calcular_Lx()
 calcular_Tx()
+
+
+console.log("El arreglo Lx tiene un tamaño de " + Lx.length);
 console.log(Lx)
+console.log(Tx)
