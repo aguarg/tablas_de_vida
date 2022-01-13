@@ -18,6 +18,13 @@
     </header>
 
 
+    <div>
+        <button onclick="calcular()">Calcular</button>
+        <button onclick="exportar_resultados()">Exportar resultados</button>
+        <button onclick="limpiar_datos()">Limpiar tabla</button>
+
+    </div>
+
     <table id="tabla">
       <tr>
         <th>nx</th>
@@ -49,24 +56,14 @@
         <td></td>
       </tr>
 
-      <tr>
-        <td><input type="text"></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td><button onclick="borrar_fila()">Borrar fila</button></td>
-      </tr>
+      
 
-        <td>
-            <button onclick="agregar_fila()">Agregar fila</button>
-            <button onclick="prueba()">Calcular</button>
-        </td>
-    
     </table> 
 
+    <div>
+        <button onclick="agregar_fila()">Agregar fila</button>
+        <button onclick="borrar_fila()">Borrar fila</button>
+    </div>
 
 
 

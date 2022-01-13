@@ -1,6 +1,9 @@
 HACER:
 - hacer la función que agregue una fila
+	- 
+
 - hacer la función que borre la fila
+
 - hacer la función que calcule todo y meta los datos en la tabla
 	- la función debe iterar por los nodos de la tabla y meter cada valor en el arreglo nx
 	- luego hay que llamar las funciones de cálculo sobre ese arreglo normalmente

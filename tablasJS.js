@@ -1,33 +1,51 @@
 
 //Función que agrega una fila al final de la tabla:
 function agregar_fila(){
-  var table = document.getElementById("tabla");
+  var tabla = document.getElementById("tabla");
 
-// Crea un elemento <tr> vacío y lo agrega al final de la tabla:
-var row = table.insertRow(-1);
+  // Crea un elemento <tr> vacío y lo agrega al final de la tabla:
+  var fila = tabla.insertRow(-1);
 
-var cell1 = row.insertCell(0);
-var cell2 = row.insertCell(1);
-var cell3 = row.insertCell(2);
-var cell4 = row.insertCell(3);
-var cell5 = row.insertCell(4);
-var cell6 = row.insertCell(5);
-var cell7 = row.insertCell(6);
+  var nx = fila.insertCell(0);
+  var lx = fila.insertCell(1);
+  var dx = fila.insertCell(2);
+  var qx = fila.insertCell(3);
+  var Lx = fila.insertCell(4);
+  var Tx = fila.insertCell(5);
+  var ex = fila.insertCell(6);
 
-// Add some text to the new cells: lo borré porque estoy probando
-//cell1.innerHTML = "";
-//cell2.innerHTML = "";   
+    
+  // agregamos un input a la celda nx:
+  nx.innerHTML = '<input>';
 
+  
 }
 
 
 // Función para borrar la última fila:
 function borrar_fila(){
   document.getElementById("tabla").deleteRow(-1);
+
 }
 
 
 
 function calcular(){
+  
+}
 
+
+function exportar_datos(){
+
+}
+
+
+function limpiar_datos(){
+    //Limpiando los inputs de la tabla, no el resto de las celdas:
+    let elementos = [] ;
+    elementos = document.getElementsByTagName("input");
+
+    for(var i=0; i<elementos.length ; i++){
+       elementos[i].value = "" ;
+    }    
 }
