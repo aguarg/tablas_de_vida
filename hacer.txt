@@ -1,8 +1,4 @@
 HACER:
-- hacer la función que agregue una fila
-	- 
-
-- hacer la función que borre la fila
 
 - hacer la función que calcule todo y meta los datos en la tabla
 	- la función debe iterar por los nodos de la tabla y meter cada valor en el arreglo nx
@@ -20,4 +16,4 @@ HACER:
 
 - ver chart.js para agregar una tabla a la derecha, con los datos graficados
 
-- agregar un botón para descargar los datos como un archivo o algo así.
+

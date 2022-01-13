@@ -10,4 +10,16 @@ h1 {
 table, th, td {
   border:1px solid black;
   padding: 15px;
+  margin: 15px;
+}
+
+
+.cont_botones_app {
+  background-color: blue;
+}
+
+
+
+.cont_botones_tabla {
+
 }

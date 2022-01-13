@@ -1,10 +1,15 @@
+export
 
+
+function saludo(){
+	alert("hola");
+}
 //un arreglo para probar las funciones de mas abajo. Los números salen de un ejercicio de verdad:
 
 //Los cálculos devuelven números con muchos decimales. Se puede usar .toFixed(3) pero devuelve strings. No usarlo excepto al 
 //final, para mostrar los datos en la tabla.
 
-// ARREGLOS CON LOS INGRESADO POR EL USUARIO Y LOS RESULTADOS DE LOS CÁLCULOS
+// ARREGLOS CON LOS INGRESADO POR EL USUARIO Y LOS RESULTADOS DE LOS CÁLCULOS. Borrar después.
 var nx = [996, 668, 295, 190, 176, 172, 167, 159, 154, 147, 105, 22, 0];
 
 
