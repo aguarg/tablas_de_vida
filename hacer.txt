@@ -1,0 +1,23 @@
+HACER:
+- hacer la función que agregue una fila
+	- 
+
+- hacer la función que borre la fila
+
+- hacer la función que calcule todo y meta los datos en la tabla
+	- la función debe iterar por los nodos de la tabla y meter cada valor en el arreglo nx
+	- luego hay que llamar las funciones de cálculo sobre ese arreglo normalmente
+	- luego, la función debe cortar los valores a 2 decimales (ese método pasa los decimales a strings)
+	- luego hay que meter esos resultados en cada nodo de la tabla
+
+- Hacer una caja con los resultados pero explicados. Ej "el X% de los individuos van a vivir Y".
+
+- Agregar un botón para limpiar la tabla.
+
+- Agregar un botón para descargar los datos.
+
+- darle estilo. Pero esto al final, cuando todo lo demás funcione bien.
+
+- ver chart.js para agregar una tabla a la derecha, con los datos graficados
+
+- agregar un botón para descargar los datos como un archivo o algo así.
