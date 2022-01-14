@@ -22,12 +22,12 @@ function agregar_fila(){
   nx.innerHTML = '<input>';
   
   // Les damos dos clases a los elementos que creamos mas arriba:
-  lx.class = "celda lx";
-  dx.class = "celda dx";
-  qx.class = "celda qx";
-  Lx.class = "celda Lx";
-  Tx.class = "celda Tx";
-  ex.class = "celda ex";
+  lx.className = "celda lx";
+  dx.className = "celda dx";
+  qx.className = "celda qx";
+  Lx.className = "celda Lx";
+  Tx.className = "celda Tx";
+  ex.className = "celda ex";
   
   
 }
@@ -73,7 +73,7 @@ function limpiar_datos(){
     
     
     for (var j=0; j<valores_celdas.length; j++) {
-      valores_celdas[j].innerHTML = "<td id=celda></td>";
+      valores_celdas[j].innerHTML = "<td id=celda></td>"; //¿el ID es necesario?  <-------------
     }
 
 
@@ -102,20 +102,8 @@ function limpiar_datos(){
 
 
 
-
-
-
-
-
-
-
-
-
-
 // FUNCIONES PARA HACER LOS CÁLCULOS ================================================================
 
-//Los cálculos devuelven números con muchos decimales. Se puede usar .toFixed(3) pero devuelve strings. No usarlo excepto al 
-//final, para mostrar los datos en la tabla.
 
 // Arreglo de prueba. Usar para el "test".
 //var nx = [996, 668, 295, 190, 176, 172, 167, 159, 154, 147, 105, 22, 0];
@@ -168,7 +156,9 @@ function calcular_lx(){
 function calcular_dx(){
     for (var i = 0; i < nx.length; i++) {
         
-        dx.push(nx[i] - nx[i + 1]);  
+        dx.push(nx[i] - nx[i + 1]);
+
+
     }
 
 }
@@ -189,7 +179,8 @@ function calcular_qx(){
 function calcular_Lx(){
     for (var i = 0; i < nx.length; i++) {
         
-        Lx.push((nx[i] + nx[i + 1]) / 2);  
+        Lx.push((nx[i] + nx[i + 1]) / 2);
+
     }
 
 
@@ -237,8 +228,8 @@ function tomar_datos_ingresados_nx(){
     let datos_ingresados = document.getElementsByTagName("input");
     for (var i = 0; i < datos_ingresados.length; i++) {
         
-        nx.push(datos_ingresados[i].value);
-         
+        nx.push(parseInt(datos_ingresados[i].value));
+
     }
  
     
@@ -264,31 +255,76 @@ function calcular(){
     calcular_Tx()
     calcular_ex()
 
+    console.log("arreglo nx: " + nx)
+    console.log("arreglo lx: " + lx)
+    console.log("arreglo dx: " + dx)
+    console.log("arreglo qx: " + qx)
+    console.log("arreglo Lx: " + Lx)
+    console.log("arreglo Tx: " + Tx)
+    console.log("arreglo ex: " + ex)
+
 
     // Cargamos los resultados en las celdas de la tabla:
     cargar_resultados()
 
-    
-    
 }
 
 
 
 
 
-
-//NO FUNCIONA PORQUE LAS CELDAS NUEVAS SE CREAN SIN LAS CLASES CELDA NI LX O LA QUE SEA.
-//FUNCIONA BIEN PARA LAS CELDAS QUE YA ESTABAN ESCRITAS EN EL HTML.
-
 //Función que carga los datos de los arreglos a la tabla:
 function cargar_resultados(){
     
+    // Cargamos los resultados de la columna lx:
     celdas_lx = document.getElementsByClassName("lx");
     
-    
-    for (var i=0; i<celdas_lx.length; i++) {
-      celdas_lx[i].innerHTML = lx[i].toFixed(3);
+        for (let i=0; i<celdas_lx.length; i++) {
+            celdas_lx[i].innerHTML = lx[i].toFixed(3);
     }
+
+
+    // Cargamos los resultados de la columna dx:
+    celdas_dx = document.getElementsByClassName("dx");
+    
+        for ( i=0; i<celdas_dx.length; i++) {
+            celdas_dx[i].innerHTML = dx[i].toFixed(3);
+    }
+
+
+    // Cargamos los resultados de la columna qx:
+    celdas_qx = document.getElementsByClassName("qx");
+    
+        for ( i=0; i<celdas_qx.length; i++) {
+            celdas_qx[i].innerHTML = qx[i].toFixed(3);
+    }
+
+
+    // Cargamos los resultados de la columna Lx:
+    celdas_Lx = document.getElementsByClassName("Lx");
+    
+        for ( i=0; i<celdas_Lx.length; i++) {
+            celdas_Lx[i].innerHTML = Lx[i].toFixed(3);
+    }
+
+
+
+    // Cargamos los resultados de la columna Tx:
+    celdas_Tx = document.getElementsByClassName("Tx");
+    
+        for ( i=0; i<celdas_Tx.length; i++) {
+            celdas_Tx[i].innerHTML = Tx[i].toFixed(3);
+    }
+
+
+    // Cargamos los resultados de la columna ex:
+    celdas_ex = document.getElementsByClassName("ex");
+    
+        for ( i=0; i<celdas_ex.length; i++) {
+            celdas_ex[i].innerHTML = ex[i].toFixed(3);
+    }
+
+
 }
 
 

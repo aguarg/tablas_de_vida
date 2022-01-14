@@ -125,7 +125,12 @@ calcular_ex()
 
 
 
-console.log(qx)
-
+console.log("arreglo nx: " + nx)
+console.log("arreglo lx: " + lx)
+console.log("arreglo dx: " + dx)
+console.log("arreglo qx: " + qx)
+console.log("arreglo Lx: " + Lx)
+console.log("arreglo Tx: " + Tx)
+console.log("arreglo ex: " + ex)
 
 

@@ -1,13 +1,10 @@
 HACER:
-- TODO FUNCIONA BIEN. Cualquier cosa que agregue, es eso lo que creó el error.
 
-NOTA: podría hacer que cada función que hace su parte del cálculo itere por el arreglo 
-recién calculado, haga un .toFixed(3) y lo meta donde deba en la tabla, pero sin tocar los arreglos que
-se usan en los cálculos.
-Ya empecé una función al final.
 
-O, por ahí hacer una función aparte al final, para no complicar mas las otras funciones.
-Una sola que meta todos los datos, aunque sea engorrosa.
+con parseInt() se pasan los strings a int. Probar de hacerlo en el arreglo nx.
+UPDATE: ahora Lx funciona bien.
+
+- ERROR EN Tx y ex: esos son los arreglos que iteraban alrevés?
 
 
 - Hacer una caja con los resultados pero explicados. Ej "el X% de los individuos van a vivir Y".
