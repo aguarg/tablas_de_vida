@@ -1,14 +1,16 @@
 HACER:
+- TODO FUNCIONA BIEN. Cualquier cosa que agregue, es eso lo que creó el error.
 
-- hacer la función que calcule todo y meta los datos en la tabla
-	- la función debe iterar por los nodos de la tabla y meter cada valor en el arreglo nx
-	- luego hay que llamar las funciones de cálculo sobre ese arreglo normalmente
-	- luego, la función debe cortar los valores a 2 decimales (ese método pasa los decimales a strings)
-	- luego hay que meter esos resultados en cada nodo de la tabla
+NOTA: podría hacer que cada función que hace su parte del cálculo itere por el arreglo 
+recién calculado, haga un .toFixed(3) y lo meta donde deba en la tabla, pero sin tocar los arreglos que
+se usan en los cálculos.
+Ya empecé una función al final.
+
+O, por ahí hacer una función aparte al final, para no complicar mas las otras funciones.
+Una sola que meta todos los datos, aunque sea engorrosa.
+
 
 - Hacer una caja con los resultados pero explicados. Ej "el X% de los individuos van a vivir Y".
-
-- Agregar un botón para limpiar la tabla.
 
 - Agregar un botón para descargar los datos.
 
@@ -16,4 +18,5 @@ HACER:
 
 - ver chart.js para agregar una tabla a la derecha, con los datos graficados
 
+- hacer algo como que: si en el primer inbox se escribe "test", se usa el arreglo de prueba para los cálculos, como una forma de ver que hace la app sin saber del tema.
 

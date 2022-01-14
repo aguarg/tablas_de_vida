@@ -21,13 +21,13 @@ function agregar_fila(){
   // agregamos un input a la celda nx:
   nx.innerHTML = '<input>';
   
-  
-  lx.class = "celda";
-  dx.class = "celda";
-  qx.class = "celda";
-  Lx.class = "celda";
-  Tx.class = "celda";
-  ex.class = "celda";
+  // Les damos dos clases a los elementos que creamos mas arriba:
+  lx.class = "celda lx";
+  dx.class = "celda dx";
+  qx.class = "celda qx";
+  Lx.class = "celda Lx";
+  Tx.class = "celda Tx";
+  ex.class = "celda ex";
   
   
 }
@@ -54,13 +54,11 @@ function borrar_fila(){
 
 
 
-//Función que vacía los imputs y borra los valores de las celdas:
+//Función que vacía los inputs, los arreglos y borra los valores de las celdas:
 function limpiar_datos(){
     //Limpiando los inputs de la tabla, no el resto de las celdas:
     let elementos_input = [] ;
     elementos_input = document.getElementsByTagName("input");
-
-    
 
     for(var i=0; i<elementos_input.length ; i++){
        elementos_input[i].value = "" ;
@@ -69,15 +67,27 @@ function limpiar_datos(){
     } 
 
 
-    //Limpiando las celdas:
+    //Limpiando las celdas de la tabla:
     let valores_celdas = [] ;
     valores_celdas = document.getElementsByClassName("celda");
     
-
     
     for (var j=0; j<valores_celdas.length; j++) {
       valores_celdas[j].innerHTML = "<td id=celda></td>";
     }
+
+
+    
+    // Vaciando los arreglos con los datos calculados, de otra forma suma los elementos a los nuevos:
+    nx = [];
+    lx = [];
+    dx = [];
+    qx = [];
+    Lx = [];
+    Tx = [];
+    ex = [];
+
+
      
 }
 
@@ -103,14 +113,15 @@ function limpiar_datos(){
 
 
 // FUNCIONES PARA HACER LOS CÁLCULOS ================================================================
-//un arreglo para probar las funciones de mas abajo. Los números salen de un ejercicio de verdad:
 
 //Los cálculos devuelven números con muchos decimales. Se puede usar .toFixed(3) pero devuelve strings. No usarlo excepto al 
 //final, para mostrar los datos en la tabla.
 
-// ARREGLOS CON LOS INGRESADO POR EL USUARIO Y LOS RESULTADOS DE LOS CÁLCULOS. Borrar después.
-var nx = [996, 668, 295, 190, 176, 172, 167, 159, 154, 147, 105, 22, 0];
+// Arreglo de prueba. Usar para el "test".
+//var nx = [996, 668, 295, 190, 176, 172, 167, 159, 154, 147, 105, 22, 0];
 
+// Arreglo con los datos nx ingresados por el usuario. La función que los carga está mas abajo:
+var nx = [];
 
 // Resultados de la columna lx: 
 var lx = [];
@@ -219,19 +230,45 @@ function calcular_ex(){
 
 
 
+// Función que obtiene los datos de los inputs y los carga en el arreglo nx de mas arriba:
 
+function tomar_datos_ingresados_nx(){
+    
+    let datos_ingresados = document.getElementsByTagName("input");
+    for (var i = 0; i < datos_ingresados.length; i++) {
+        
+        nx.push(datos_ingresados[i].value);
+         
+    }
+ 
+    
+}
 
 
 
 
 // Hacemos los cálculos. Esta función está enlazada al bótón "Calcular" de la app:
 function calcular(){
+    // Vaciamos el arreglo nx para que no sume los elementos que tenía a los datos ingresados nuevos:
+    nx = [];
+
+
+    // Tomamos los datos ingresados en los inputs:
+    tomar_datos_ingresados_nx()
+
+    //Hacemos los cálculos:
     calcular_lx()
     calcular_dx()
     calcular_qx()
     calcular_Lx()
     calcular_Tx()
     calcular_ex()
+
+
+    // Cargamos los resultados en las celdas de la tabla:
+    cargar_resultados()
+
+    
     
 }
 
@@ -239,6 +276,20 @@ function calcular(){
 
 
 
+
+//NO FUNCIONA PORQUE LAS CELDAS NUEVAS SE CREAN SIN LAS CLASES CELDA NI LX O LA QUE SEA.
+//FUNCIONA BIEN PARA LAS CELDAS QUE YA ESTABAN ESCRITAS EN EL HTML.
+
+//Función que carga los datos de los arreglos a la tabla:
+function cargar_resultados(){
+    
+    celdas_lx = document.getElementsByClassName("lx");
+    
+    
+    for (var i=0; i<celdas_lx.length; i++) {
+      celdas_lx[i].innerHTML = lx[i].toFixed(3);
+    }
+}
 
 
 // FUNCION PARA EXPORTAR LOS RESULTADOS ============================================================
