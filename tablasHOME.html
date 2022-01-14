@@ -9,16 +9,19 @@
     
     <link rel="stylesheet" href="tablasEstilos.css">
     <script type="text/javascript" src="tablasJS.js"></script>
-    <script type="text/javascript" src="calculos_tablas.js"></script>
+    
+
+
 </head>
 
 <body>
     <header>
         <h1>Cálculo de tablas de vida</h1>
+        <h3>Explicacion breve de que mierda hace esto</h3>
     </header>
 
 
-    <div>
+    <div class="cont_botones_app">
         <button onclick="calcular()">Calcular</button>
         <button onclick="exportar_resultados()">Exportar resultados</button>
         <button onclick="limpiar_datos()">Limpiar tabla</button>
@@ -27,7 +30,7 @@
 
     <table id="tabla">
       <tr>
-        <th>nx</th>
+        <th>nx</th> <!--th es table header-->
         <th>lx</th>
         <th>dx</th>
         <th>qx</th>
@@ -38,29 +41,28 @@
       
       <tr>
         <td><input type="text"></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td class="celda lx">lx1</td>
+        <td class="celda dx">dx1</td>
+        <td class="celda qx">qx1</td>
+        <td class="celda Lx">Lx1</td>
+        <td class="celda Tx">Tx1</td>
+        <td class="celda ex">ex1</td>
       </tr>
       
       <tr>
         <td><input type="text"></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td class="celda lx">lx2</td>
+        <td class="celda dx">dx2</td>
+        <td class="celda qx">qx2</td>
+        <td class="celda Lx">Lx2</td>
+        <td class="celda Tx">Tx2</td>
+        <td class="celda ex">ex2</td>
       </tr>
 
       
-
     </table> 
 
-    <div>
+    <div class="cont_botones_tabla">
         <button onclick="agregar_fila()">Agregar fila</button>
         <button onclick="borrar_fila()">Borrar fila</button>
     </div>

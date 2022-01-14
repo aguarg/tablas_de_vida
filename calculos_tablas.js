@@ -4,7 +4,7 @@
 //Los cálculos devuelven números con muchos decimales. Se puede usar .toFixed(3) pero devuelve strings. No usarlo excepto al 
 //final, para mostrar los datos en la tabla.
 
-// ARREGLOS CON LOS INGRESADO POR EL USUARIO Y LOS RESULTADOS DE LOS CÁLCULOS
+// ARREGLOS CON LOS INGRESADO POR EL USUARIO Y LOS RESULTADOS DE LOS CÁLCULOS. Borrar después.
 var nx = [996, 668, 295, 190, 176, 172, 167, 159, 154, 147, 105, 22, 0];
 
 
@@ -14,6 +14,10 @@ var lx = [];
 
 // Resultados de la columna dx:
 var dx = [];
+
+
+// Resultados de la columna qx:
+var qx = [];
 
 
 //resultados de la columna Lx:
@@ -45,7 +49,7 @@ function calcular_lx(){
 }
 
 
-// Calcular los valores de la columna qx: Tasa de mortalidad durante el intervalo de edad X a X+1
+// Calcular los valores de la columna dx: número de muertes durante el intervalo de edad X a X+1
 function calcular_dx(){
 	for (var i = 0; i < nx.length; i++) {
    		
@@ -54,6 +58,16 @@ function calcular_dx(){
 
 }
 
+
+
+// Calcular los valores de la columna qx: Tasa de mortalidad:
+function calcular_qx(){
+	for (var i = 0; i < nx.length; i++) {
+   		
+   		qx.push(dx[i] / nx[i]);  
+	}
+
+}
 
 
 // Calcular los valores de la columna Lx: núm promedio de sobrevivientes durante el intervalo de edad X a X+1
@@ -102,11 +116,21 @@ function calcular_ex(){
 
 
 
-
+calcular_lx()
+calcular_dx()
+calcular_qx()
 calcular_Lx()
 calcular_Tx()
 calcular_ex()
 
-console.log(nx)
-console.log(Tx)
-console.log(ex)
+
+
+console.log("arreglo nx: " + nx)
+console.log("arreglo lx: " + lx)
+console.log("arreglo dx: " + dx)
+console.log("arreglo qx: " + qx)
+console.log("arreglo Lx: " + Lx)
+console.log("arreglo Tx: " + Tx)
+console.log("arreglo ex: " + ex)
+
+
