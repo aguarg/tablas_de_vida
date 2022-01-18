@@ -108,8 +108,10 @@ function limpiar_datos(){
 // Arreglo de prueba. Usar para el "test".
 //var nx = [996, 668, 295, 190, 176, 172, 167, 159, 154, 147, 105, 22, 0];
 
+
+//Ya que los arrays se vacían mas abajo, pensé en sacarlos a ver que pasa. Parece que funciona.
 // Arreglo con los datos nx ingresados por el usuario. La función que los carga está mas abajo:
-var nx = [];
+/*var nx = [];
 
 // Resultados de la columna lx: 
 var lx = [];
@@ -132,7 +134,7 @@ var Tx = [];
 
 
 //Resultados de la columna ex:
-var ex = [];
+var ex = [];*/
 
 
 
@@ -143,7 +145,6 @@ var ex = [];
 // FUNCIONES:
 // Calcular los valores de la columna lx: proporción de organismos supervivientes al empezar el intervalo de edad X
 function calcular_lx(){
-    
     for (var i = 0; i < nx.length; i++) {
         
         lx.push(nx[i]/nx[0]);  
@@ -161,6 +162,8 @@ function calcular_dx(){
 
     }
 
+
+    
 }
 
 
@@ -222,7 +225,6 @@ function calcular_ex(){
 
 
 // Función que obtiene los datos de los inputs y los carga en el arreglo nx de mas arriba:
-
 function tomar_datos_ingresados_nx(){
     
     let datos_ingresados = document.getElementsByTagName("input");
@@ -240,8 +242,14 @@ function tomar_datos_ingresados_nx(){
 
 // Hacemos los cálculos. Esta función está enlazada al bótón "Calcular" de la app:
 function calcular(){
-    // Vaciamos el arreglo nx para que no sume los elementos que tenía a los datos ingresados nuevos:
+    // Creamos arregloas para guardar los valores calculados:
     nx = [];
+    lx = [];
+    dx = [];
+    qx = [];
+    Lx = [];
+    Tx = [];
+    ex = [];
 
 
     // Tomamos los datos ingresados en los inputs:
@@ -255,6 +263,8 @@ function calcular(){
     calcular_Tx()
     calcular_ex()
 
+
+
     console.log("arreglo nx: " + nx)
     console.log("arreglo lx: " + lx)
     console.log("arreglo dx: " + dx)
@@ -266,6 +276,8 @@ function calcular(){
 
     // Cargamos los resultados en las celdas de la tabla:
     cargar_resultados()
+
+
 
 }
 
@@ -313,15 +325,15 @@ function cargar_resultados(){
     celdas_Tx = document.getElementsByClassName("Tx");
     
         for ( i=0; i<celdas_Tx.length; i++) {
-            celdas_Tx[i].innerHTML = Tx[i].toFixed(3);
+            celdas_Tx[i].innerHTML = Tx[i + 1].toFixed(3);
     }
 
 
     // Cargamos los resultados de la columna ex:
     celdas_ex = document.getElementsByClassName("ex");
-    
+
         for ( i=0; i<celdas_ex.length; i++) {
-            celdas_ex[i].innerHTML = ex[i].toFixed(3);
+            celdas_ex[i].innerHTML = ex[i + 1].toFixed(3);
     }
 
 

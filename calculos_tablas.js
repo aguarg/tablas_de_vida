@@ -134,3 +134,18 @@ console.log("arreglo Tx: " + Tx)
 console.log("arreglo ex: " + ex)
 
 
+
+
+// Funcion de prueba que remueve los NaN: funciona.
+const results = ex.filter(element => {
+  return (
+    element !== null &&
+    element !== undefined &&
+    element !== '' &&
+    !Number.isNaN(element)
+  );
+});
+
+console.log(results);
+
+

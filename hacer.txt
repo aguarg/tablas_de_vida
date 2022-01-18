@@ -4,7 +4,12 @@ HACER:
 con parseInt() se pasan los strings a int. Probar de hacerlo en el arreglo nx.
 UPDATE: ahora Lx funciona bien.
 
-- ERROR EN Tx y ex: esos son los arreglos que iteraban alrevés?
+- ERROR EN ex: ¿conectado a la columna Tx? 
+Hay problemas: cuando hago click en calcular, tengo que clickera 2 veces para calcular lo de ex, y a la vez se borra Tx.
+
+CREO que se generan los problemas porque algunos arrays tienen elementos NaN o tal vez no tienen los mismos números. 
+Podría solucionar eso reemplazando los NaN del final, con otro número y luego no mostrarlos, o iterar por los arreglos y eliminar los Nan.
+
 
 
 - Hacer una caja con los resultados pero explicados. Ej "el X% de los individuos van a vivir Y".
