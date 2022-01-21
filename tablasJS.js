@@ -1,3 +1,14 @@
+var nx = [];
+var lx = [];
+var dx = [];
+var qx = [];
+var Lx = [];
+var Tx = [];
+var ex = [];
+
+
+
+
 
 
 //FUNCIONES PARA LOS BOTONES DE LA APP: ===========================================================
@@ -9,25 +20,25 @@ function agregar_fila(){
   var fila = tabla.insertRow(-1);
 
   // Se crean las celdas y se las asigna a fila, creada mas arriba:
-  var nx = fila.insertCell(0);
-  var lx = fila.insertCell(1);
-  var dx = fila.insertCell(2);
-  var qx = fila.insertCell(3);
-  var Lx = fila.insertCell(4);
-  var Tx = fila.insertCell(5);
-  var ex = fila.insertCell(6);
+  var fila_nx = fila.insertCell(0);
+  var fila_lx = fila.insertCell(1);
+  var fila_dx = fila.insertCell(2);
+  var fila_qx = fila.insertCell(3);
+  var fila_Lx = fila.insertCell(4);
+  var fila_Tx = fila.insertCell(5);
+  var fila_ex = fila.insertCell(6);
 
     
   // agregamos un input a la celda nx:
-  nx.innerHTML = '<input>';
+  fila_nx.innerHTML = '<input>';
   
   // Les damos dos clases a los elementos que creamos mas arriba:
-  lx.className = "celda lx";
-  dx.className = "celda dx";
-  qx.className = "celda qx";
-  Lx.className = "celda Lx";
-  Tx.className = "celda Tx";
-  ex.className = "celda ex";
+  fila_lx.className = "celda lx";
+  fila_dx.className = "celda dx";
+  fila_qx.className = "celda qx";
+  fila_Lx.className = "celda Lx";
+  fila_Tx.className = "celda Tx";
+  fila_ex.className = "celda ex";
   
   
 }
@@ -73,7 +84,7 @@ function limpiar_datos(){
     
     
     for (var j=0; j<valores_celdas.length; j++) {
-      valores_celdas[j].innerHTML = "<td id=celda></td>"; //¿el ID es necesario?  <-------------
+      valores_celdas[j].innerHTML = "<td></td>"
     }
 
 
@@ -95,8 +106,39 @@ function limpiar_datos(){
 
 
 
+// FUNCION QUE OBTIENE LOS DATOS INGRESADOS POR EL USUARIO ========================================
+// Función que obtiene los datos de los inputs y los carga en el arreglo nx de mas arriba:
+function tomar_datos_ingresados_nx(){
+    
+    let datos_ingresados = document.getElementsByTagName("input");
+    for (var i = 0; i < datos_ingresados.length; i++) {
+        
+        nx.push(parseInt(datos_ingresados[i].value));
+
+    }
+ 
+    
+}
 
 
+
+
+
+//FUNCION LIMPIADORA DE ARREGLOS
+//Toma un arreglo, pasa todo a int y elimina los elementos NaN, null, undefined, vacíos y strings. Por el tipo de toma de datos, algunas
+//funciones la requieren antes de pasar a los cálculos siguientes.
+function filter_list(l) {
+      //pasamos los valores a integers:  
+      l.push(parseInt(l));  
+      
+      //limpiamos el arreglo de todo lo que no sea integers:
+      return l.filter(x => typeof x === "number" &&
+        x !== null &&
+        x !== undefined &&
+        x !== '' &&
+        !Number.isNaN(x)
+        );
+}
 
 
 
@@ -104,76 +146,41 @@ function limpiar_datos(){
 
 // FUNCIONES PARA HACER LOS CÁLCULOS ================================================================
 
-
-// Arreglo de prueba. Usar para el "test".
-//var nx = [996, 668, 295, 190, 176, 172, 167, 159, 154, 147, 105, 22, 0];
-
-
-//Ya que los arrays se vacían mas abajo, pensé en sacarlos a ver que pasa. Parece que funciona.
-// Arreglo con los datos nx ingresados por el usuario. La función que los carga está mas abajo:
-/*var nx = [];
-
-// Resultados de la columna lx: 
-var lx = [];
-
-
-// Resultados de la columna dx:
-var dx = [];
-
-
-// Resultados de la columna qx:
-var qx = [];
-
-
-//resultados de la columna Lx:
-var Lx = [];
-
-
-//Resultados de la columna Tx:
-var Tx = [];
-
-
-//Resultados de la columna ex:
-var ex = [];*/
-
-
-
-
-
-
-
-// FUNCIONES:
 // Calcular los valores de la columna lx: proporción de organismos supervivientes al empezar el intervalo de edad X
 function calcular_lx(){
     for (var i = 0; i < nx.length; i++) {
         
         lx.push(nx[i]/nx[0]);  
     }
-    
 }
 
 
 // Calcular los valores de la columna dx: número de muertes durante el intervalo de edad X a X+1
 function calcular_dx(){
+    
     for (var i = 0; i < nx.length; i++) {
         
         dx.push(nx[i] - nx[i + 1]);
 
-
     }
-
-
     
+    dx = filter_list(dx);
+
 }
 
+//ERROR: EX NO MUESTRA EN TABLA LOS CÁLCULOS SIGUIENTES==========================
 
 
 // Calcular los valores de la columna qx: Tasa de mortalidad:
 function calcular_qx(){
+    
     for (var i = 0; i < nx.length; i++) {
         
         qx.push(dx[i] / nx[i]);  
     }
+
+    
+    qx = filter_list(qx);
 
 }
 
@@ -185,6 +192,9 @@ function calcular_Lx(){
         Lx.push((nx[i] + nx[i + 1]) / 2);
 
     }
+
+    
+    Lx = filter_list(Lx);
 
 
 }
@@ -205,6 +215,9 @@ function calcular_Tx(){
         valor_actual = suma;
     }
 
+    
+    Tx = filter_list(Tx);
+
 
 
 }
@@ -219,30 +232,20 @@ function calcular_ex(){
         
         ex.push(tx_invertido[i + 1] / nx[i]);  
     }
+    
+    
+    ex = filter_list(ex);
 
 }
 
 
-
-// Función que obtiene los datos de los inputs y los carga en el arreglo nx de mas arriba:
-function tomar_datos_ingresados_nx(){
-    
-    let datos_ingresados = document.getElementsByTagName("input");
-    for (var i = 0; i < datos_ingresados.length; i++) {
-        
-        nx.push(parseInt(datos_ingresados[i].value));
-
-    }
- 
-    
-}
 
 
 
 
 // Hacemos los cálculos. Esta función está enlazada al bótón "Calcular" de la app:
 function calcular(){
-    // Creamos arregloas para guardar los valores calculados:
+    // Creamos arreglos para guardar los valores calculados:
     nx = [];
     lx = [];
     dx = [];

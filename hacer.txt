@@ -1,14 +1,17 @@
 HACER:
+ERROR: no carga los datos ex en la tabla, pero si hago un console.log(), se ve que crea un arreglo con los datos. 
+Varios arreglos tienen valores NaN y tengo que andar haciendo malavares con los i+2, etc para evitar los NaN y eso puede ser motivo de error.
+
+Posibles soluciones:
+1- cuando tomo los datos de nx y los meto en un arreglo, pasar el arreglo a int con Number() para asegurarme de que TODO es tratado como ints.
+
+2- Los NaNs se van a generar por cuestiones de los cálculos. Hacer los cálculos normalmente y luego pasarle el "filtro" que remueve los NaN a TODOS los arreglos que se crean, así no jode al arreglo que sigue.
+
+Esto significa que voy a tener que rehacer los iteradores de las funciones que calculan las cosas.
 
 
-con parseInt() se pasan los strings a int. Probar de hacerlo en el arreglo nx.
-UPDATE: ahora Lx funciona bien.
-
-- ERROR EN ex: ¿conectado a la columna Tx? 
-Hay problemas: cuando hago click en calcular, tengo que clickera 2 veces para calcular lo de ex, y a la vez se borra Tx.
-
-CREO que se generan los problemas porque algunos arrays tienen elementos NaN o tal vez no tienen los mismos números. 
-Podría solucionar eso reemplazando los NaN del final, con otro número y luego no mostrarlos, o iterar por los arreglos y eliminar los Nan.
+Cálculos que generan NaN: desde dx en adelante. No son errores de código, son errores de que se quiere calcular con números que no existen, como los de dx = nx - n(x + 1) que va a usar un número que no existe. 
+Entonces, primero calcular, luego meter en el arreglo, y luego filtrar los NaN para dejarlo limpito para el cálculo siguiente.
 
 
 

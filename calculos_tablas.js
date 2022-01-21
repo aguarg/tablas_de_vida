@@ -146,6 +146,5 @@ const results = ex.filter(element => {
   );
 });
 
-console.log(results);
 
 
