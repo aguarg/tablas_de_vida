@@ -168,7 +168,7 @@ function calcular_dx(){
 
 }
 
-//ERROR: EX NO MUESTRA EN TABLA LOS CÁLCULOS SIGUIENTES==========================
+
 
 
 // Calcular los valores de la columna qx: Tasa de mortalidad:
@@ -218,15 +218,19 @@ function calcular_Tx(){
     
     Tx = filter_list(Tx);
 
-
-
 }
+
+
+
+//ERROR: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+// ex muestra un resultado extra al final: sacar del arreglo.
+// Tx muestra un resultado al inicio: sacar del arreglo.
 
 
 // Calcular los valores de la columna ex: esperanza media de vida para los organismo al comienzo de la edad X
 function calcular_ex(){
     //El arreglo Tx está invertido para facilitar la lectura, pero hay que invertirlo para los cálculos:
-    var tx_invertido = Tx.reverse()
+    var tx_invertido = Tx.reverse();
     
     for (var i = 0; i < nx.length; i++) {
         
@@ -236,6 +240,7 @@ function calcular_ex(){
     
     ex = filter_list(ex);
 
+    
 }
 
 
@@ -328,7 +333,7 @@ function cargar_resultados(){
     celdas_Tx = document.getElementsByClassName("Tx");
     
         for ( i=0; i<celdas_Tx.length; i++) {
-            celdas_Tx[i].innerHTML = Tx[i + 1].toFixed(3);
+            celdas_Tx[i].innerHTML = Tx[i].toFixed(3);
     }
 
 
@@ -336,7 +341,7 @@ function cargar_resultados(){
     celdas_ex = document.getElementsByClassName("ex");
 
         for ( i=0; i<celdas_ex.length; i++) {
-            celdas_ex[i].innerHTML = ex[i + 1].toFixed(3);
+            celdas_ex[i].innerHTML = ex[i].toFixed(3);
     }
 
 
