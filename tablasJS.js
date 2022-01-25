@@ -1,3 +1,14 @@
+var nx = [];
+var lx = [];
+var dx = [];
+var qx = [];
+var Lx = [];
+var Tx = [];
+var ex = [];
+
+
+
+
 
 
 //FUNCIONES PARA LOS BOTONES DE LA APP: ===========================================================
@@ -9,25 +20,25 @@ function agregar_fila(){
   var fila = tabla.insertRow(-1);
 
   // Se crean las celdas y se las asigna a fila, creada mas arriba:
-  var nx = fila.insertCell(0);
-  var lx = fila.insertCell(1);
-  var dx = fila.insertCell(2);
-  var qx = fila.insertCell(3);
-  var Lx = fila.insertCell(4);
-  var Tx = fila.insertCell(5);
-  var ex = fila.insertCell(6);
+  var fila_nx = fila.insertCell(0);
+  var fila_lx = fila.insertCell(1);
+  var fila_dx = fila.insertCell(2);
+  var fila_qx = fila.insertCell(3);
+  var fila_Lx = fila.insertCell(4);
+  var fila_Tx = fila.insertCell(5);
+  var fila_ex = fila.insertCell(6);
 
     
   // agregamos un input a la celda nx:
-  nx.innerHTML = '<input>';
+  fila_nx.innerHTML = '<input>';
   
   // Les damos dos clases a los elementos que creamos mas arriba:
-  lx.className = "celda lx";
-  dx.className = "celda dx";
-  qx.className = "celda qx";
-  Lx.className = "celda Lx";
-  Tx.className = "celda Tx";
-  ex.className = "celda ex";
+  fila_lx.className = "celda lx";
+  fila_dx.className = "celda dx";
+  fila_qx.className = "celda qx";
+  fila_Lx.className = "celda Lx";
+  fila_Tx.className = "celda Tx";
+  fila_ex.className = "celda ex";
   
   
 }
@@ -73,7 +84,7 @@ function limpiar_datos(){
     
     
     for (var j=0; j<valores_celdas.length; j++) {
-      valores_celdas[j].innerHTML = "<td id=celda></td>"; //¿el ID es necesario?  <-------------
+      valores_celdas[j].innerHTML = "<td></td>"
     }
 
 
@@ -94,9 +105,55 @@ function limpiar_datos(){
 
 
 
+//Función que convierte strings de números a integers:
+function a_decimales(arreglo) {
+
+    for (var i = 0; i < arreglo.length; i++) {
+        arreglo[i] = parseFloat(arreglo[i]);
+    }
+    
+        
+}
 
 
 
+
+
+
+/* 
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+ERROR: 
+- si meto los datos en forma de un arreglo directamente, TODO funciona bien.
+Cuando los meto manualmente aparecen todos los errores.
+
+- Si los meto como un arreglo tira error en la consola a partir de Lx, y no muestra el resto en la tabla.
+
+* Probar de pasar TODO a int en TODAS las funciones.
+Resultado: probé de pasar la nx a int, pero no parece que haya errores. Creo que ya está pasada.
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+*/ 
+
+
+
+// FUNCION QUE OBTIENE LOS DATOS INGRESADOS POR EL USUARIO ========================================
+// Función que obtiene los datos de los inputs y los carga en el arreglo nx de mas arriba:
+function tomar_datos_ingresados_nx(){
+    
+    let datos_ingresados = document.getElementsByTagName("input");
+    
+    for (var i = 0; i < datos_ingresados.length; i++) {
+        
+        nx.push(datos_ingresados[i].value);
+
+    } 
+
+    a_decimales(nx)
+
+    //nx = [996, 668, 295, 190, 176, 172, 167, 159, 154, 147, 105, 22, 0];
+
+           
+}
 
 
 
@@ -104,73 +161,47 @@ function limpiar_datos(){
 
 // FUNCIONES PARA HACER LOS CÁLCULOS ================================================================
 
-
-// Arreglo de prueba. Usar para el "test".
-//var nx = [996, 668, 295, 190, 176, 172, 167, 159, 154, 147, 105, 22, 0];
-
-// Arreglo con los datos nx ingresados por el usuario. La función que los carga está mas abajo:
-var nx = [];
-
-// Resultados de la columna lx: 
-var lx = [];
-
-
-// Resultados de la columna dx:
-var dx = [];
-
-
-// Resultados de la columna qx:
-var qx = [];
-
-
-//resultados de la columna Lx:
-var Lx = [];
-
-
-//Resultados de la columna Tx:
-var Tx = [];
-
-
-//Resultados de la columna ex:
-var ex = [];
-
-
-
-
-
-
-
-// FUNCIONES:
 // Calcular los valores de la columna lx: proporción de organismos supervivientes al empezar el intervalo de edad X
 function calcular_lx(){
     
-    for (var i = 0; i < nx.length; i++) {
+    for (var i = 0; i < nx.length-1; i++) {
         
         lx.push(nx[i]/nx[0]);  
     }
+
+    a_decimales(lx);
     
 }
 
 
 // Calcular los valores de la columna dx: número de muertes durante el intervalo de edad X a X+1
 function calcular_dx(){
+    
     for (var i = 0; i < nx.length; i++) {
         
         dx.push(nx[i] - nx[i + 1]);
 
-
     }
+    
+    dx.pop();
 
+    a_decimales(dx);
 }
+
 
 
 
 // Calcular los valores de la columna qx: Tasa de mortalidad:
 function calcular_qx(){
+    
     for (var i = 0; i < nx.length; i++) {
         
         qx.push(dx[i] / nx[i]);  
     }
+
+    
+    qx.pop();
+    a_decimales(qx);
 
 }
 
@@ -183,65 +214,69 @@ function calcular_Lx(){
 
     }
 
+    
+    Lx.pop();
+    a_decimales(Lx);
+
 
 }
 
 
 // Calcular los valores de la columna Tx:  Números de días que les queda a los sobrevivientes que alcanzaron edad X:
 function calcular_Tx(){
-    var valor_actual = Lx[Lx.length - 2]; //asignamos el anteúltimo valor (el último es NaN) a valor_actual.
+    var valor_actual = Lx[Lx.length - 1]; //asignamos el anteúltimo valor (el último es NaN) a valor_actual.
     
     Tx.push(valor_actual); //metemos el valor_actual en el arreglo Tx.
         
 
     //esto itera por Lx desde el final, saltando los dos últimos lugares: uno el NaN y el otro el valor_actual.         
-    for (var i = Lx.length - 2; i >= 0; i--) { 
+    for (var i = Lx.length - 1; i >= 1; i--) { 
         suma = Lx[i-1] + valor_actual;
         Tx.push(suma);
 
         valor_actual = suma;
     }
 
+    a_decimales(Tx);
 
-
+    
+    
 }
+
+
+
 
 
 // Calcular los valores de la columna ex: esperanza media de vida para los organismo al comienzo de la edad X
 function calcular_ex(){
     //El arreglo Tx está invertido para facilitar la lectura, pero hay que invertirlo para los cálculos:
-    var tx_invertido = Tx.reverse()
+    var tx_invertido = Tx.reverse();
     
-    for (var i = 0; i < nx.length; i++) {
+    for (var i = 0; i < Tx.length; i++) {
         
-        ex.push(tx_invertido[i + 1] / nx[i]);  
+        ex.push(tx_invertido[i] / nx[i]);  
     }
+
+
+    a_decimales(ex);
 
 }
 
 
-
-// Función que obtiene los datos de los inputs y los carga en el arreglo nx de mas arriba:
-
-function tomar_datos_ingresados_nx(){
-    
-    let datos_ingresados = document.getElementsByTagName("input");
-    for (var i = 0; i < datos_ingresados.length; i++) {
-        
-        nx.push(parseInt(datos_ingresados[i].value));
-
-    }
- 
-    
-}
 
 
 
 
 // Hacemos los cálculos. Esta función está enlazada al bótón "Calcular" de la app:
 function calcular(){
-    // Vaciamos el arreglo nx para que no sume los elementos que tenía a los datos ingresados nuevos:
+    // Creamos arreglos para guardar los valores calculados:
     nx = [];
+    lx = [];
+    dx = [];
+    qx = [];
+    Lx = [];
+    Tx = [];
+    ex = [];
 
 
     // Tomamos los datos ingresados en los inputs:
@@ -254,6 +289,8 @@ function calcular(){
     calcular_Lx()
     calcular_Tx()
     calcular_ex()
+    
+
 
     console.log("arreglo nx: " + nx)
     console.log("arreglo lx: " + lx)
@@ -267,6 +304,8 @@ function calcular(){
     // Cargamos los resultados en las celdas de la tabla:
     cargar_resultados()
 
+
+
 }
 
 
@@ -279,7 +318,7 @@ function cargar_resultados(){
     // Cargamos los resultados de la columna lx:
     celdas_lx = document.getElementsByClassName("lx");
     
-        for (let i=0; i<celdas_lx.length; i++) {
+        for (let i=0; i<celdas_lx.length-1; i++) {
             celdas_lx[i].innerHTML = lx[i].toFixed(3);
     }
 
@@ -287,7 +326,7 @@ function cargar_resultados(){
     // Cargamos los resultados de la columna dx:
     celdas_dx = document.getElementsByClassName("dx");
     
-        for ( i=0; i<celdas_dx.length; i++) {
+        for ( i=0; i<celdas_dx.length-1; i++) {
             celdas_dx[i].innerHTML = dx[i].toFixed(3);
     }
 
@@ -295,7 +334,7 @@ function cargar_resultados(){
     // Cargamos los resultados de la columna qx:
     celdas_qx = document.getElementsByClassName("qx");
     
-        for ( i=0; i<celdas_qx.length; i++) {
+        for ( i=0; i<celdas_qx.length-1; i++) {
             celdas_qx[i].innerHTML = qx[i].toFixed(3);
     }
 
@@ -303,7 +342,7 @@ function cargar_resultados(){
     // Cargamos los resultados de la columna Lx:
     celdas_Lx = document.getElementsByClassName("Lx");
     
-        for ( i=0; i<celdas_Lx.length; i++) {
+        for ( i=0; i<celdas_Lx.length-1; i++) {
             celdas_Lx[i].innerHTML = Lx[i].toFixed(3);
     }
 
@@ -312,15 +351,15 @@ function cargar_resultados(){
     // Cargamos los resultados de la columna Tx:
     celdas_Tx = document.getElementsByClassName("Tx");
     
-        for ( i=0; i<celdas_Tx.length; i++) {
+        for ( i=0; i<celdas_Tx.length-1; i++) {
             celdas_Tx[i].innerHTML = Tx[i].toFixed(3);
     }
 
 
     // Cargamos los resultados de la columna ex:
     celdas_ex = document.getElementsByClassName("ex");
-    
-        for ( i=0; i<celdas_ex.length; i++) {
+
+        for ( i=0; i<celdas_ex.length-1; i++) {
             celdas_ex[i].innerHTML = ex[i].toFixed(3);
     }
 

@@ -38,14 +38,35 @@ var ex = [];
 
 
 // FUNCIONES:
+// Funcion limpiar. GUARDA CON ESTA MIERDA QUE METE VALORES NO DESEADOS. ENTENDER BIEN COMO FUNCIONA.
+function filter_list(l) {
+      //pasamos los valores a integers:  
+      l.push(parseInt(l));  
+      
+      //limpiamos el arreglo de todo lo que no sea integers:
+      return l.filter(x => typeof x === "number" &&
+        x !== null &&
+        x !== undefined &&
+        x !== '' &&
+        !Number.isNaN(x)
+        );
+}
+
+// No sé como funciona y está metiendo valores incorrectos. Sacar, modificar o aprender que mierda hace.
+
+
+
+
+
+
 // Calcular los valores de la columna lx: proporción de organismos supervivientes al empezar el intervalo de edad X
 function calcular_lx(){
 	
-	for (var i = 0; i < nx.length; i++) {
+	for (var i = 0; i < nx.length-1; i++) {
    		
    		lx.push(nx[i]/nx[0]);  
 	}
-	
+
 }
 
 
@@ -55,6 +76,8 @@ function calcular_dx(){
    		
    		dx.push(nx[i] - nx[i + 1]);  
 	}
+
+	dx.pop();
 
 }
 
@@ -67,6 +90,8 @@ function calcular_qx(){
    		qx.push(dx[i] / nx[i]);  
 	}
 
+	qx.pop();
+
 }
 
 
@@ -77,38 +102,39 @@ function calcular_Lx(){
    		Lx.push((nx[i] + nx[i + 1]) / 2);  
 	}
 
+	Lx.pop();
 
 }
 
 
 // Calcular los valores de la columna Tx:  Números de días que les queda a los sobrevivientes que alcanzaron edad X:
 function calcular_Tx(){
-	var valor_actual = Lx[Lx.length - 2]; //asignamos el anteúltimo valor (el último es NaN) a valor_actual.
+	var valor_actual = Lx[Lx.length - 1]; //asignamos el último valor (tiene índice -1) a valor_actual.
 	
 	Tx.push(valor_actual); //metemos el valor_actual en el arreglo Tx.
 	    
 
 	//esto itera por Lx desde el final, saltando los dos últimos lugares: uno el NaN y el otro el valor_actual. 		
-	for (var i = Lx.length - 2; i >= 0; i--) { 
+	for (var i = Lx.length - 1; i >= 1; i--) { 
     	suma = Lx[i-1] + valor_actual;
     	Tx.push(suma);
 
     	valor_actual = suma;
 	}
 
-
-
 }
 
 
 // Calcular los valores de la columna ex: esperanza media de vida para los organismo al comienzo de la edad X
 function calcular_ex(){
-	//El arreglo Tx está invertido para facilitar la lectura, pero hay que invertirlo para los cálculos:
+	//El arreglo Tx está invertido (relativo a este cálculo en particular) para facilitar la lectura, pero 
+	//hay que invertirlo para los cálculos:
 	var tx_invertido = Tx.reverse()
 	
-	for (var i = 0; i < nx.length; i++) {
+	
+	for (var i = 0; i < Tx.length; i++) {
    		
-   		ex.push(tx_invertido[i + 1] / nx[i]);  
+   		ex.push(tx_invertido[i] / nx[i]);  
 	}
 
 }
@@ -125,12 +151,57 @@ calcular_ex()
 
 
 
-console.log("arreglo nx: " + nx)
-console.log("arreglo lx: " + lx)
-console.log("arreglo dx: " + dx)
-console.log("arreglo qx: " + qx)
-console.log("arreglo Lx: " + Lx)
-console.log("arreglo Tx: " + Tx)
-console.log("arreglo ex: " + ex)
+//console.log("arreglo nx: " + nx)
+console.log()
+
+//console.log("arreglo lx: " + lx)
+console.log()
+
+//console.log("arreglo dx: " + dx)
+console.log()
+
+//console.log("arreglo qx: " + qx)
+console.log()
+
+//console.log("arreglo Lx: " + Lx)
+console.log()
+
+//console.log("arreglo ex: " + ex)
+
+
+
+/*
+// Funcion de prueba que remueve los NaN: funciona.
+const results = ex.filter(element => {
+  return (
+    element !== null &&
+    element !== undefined &&
+    element !== '' &&
+    !Number.isNaN(element)
+  );
+});
+
+*/
+
+
+var prueba = ["1", "2.3", "3", "4.5", "5"];
+
+
+//Función que convierte strings de números a integers:
+function a_decimales(arreglo) {
+
+	for (var i = 0; i < arreglo.length; i++) {
+		arreglo[i] = parseFloat(arreglo[i]);
+	}
+	
+	console.log(arreglo)
+	
+}
+
+
+console.log(prueba)
+a_numeros(prueba)
+
+
 
 

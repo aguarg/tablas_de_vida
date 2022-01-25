@@ -23,3 +23,8 @@ table, th, td {
 .cont_botones_tabla {
 
 }
+
+
+input {
+  width: 50px;
+}

@@ -1,12 +1,4 @@
-HACER:
-
-
-con parseInt() se pasan los strings a int. Probar de hacerlo en el arreglo nx.
-UPDATE: ahora Lx funciona bien.
-
-- ERROR EN Tx y ex: esos son los arreglos que iteraban alrevés?
-
-
+HACER
 - Hacer una caja con los resultados pero explicados. Ej "el X% de los individuos van a vivir Y".
 
 - Agregar un botón para descargar los datos.
@@ -16,4 +8,23 @@ UPDATE: ahora Lx funciona bien.
 - ver chart.js para agregar una tabla a la derecha, con los datos graficados
 
 - hacer algo como que: si en el primer inbox se escribe "test", se usa el arreglo de prueba para los cálculos, como una forma de ver que hace la app sin saber del tema.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+tx_in	2753,	1921,	1439.5,	1197,	1014,	840,	670.5,	507.5,	351,	200.5,	74.5,	11
+nx 		996, 	668, 	295, 	190, 	176, 	172, 	167, 	159, 	154, 	147, 	105, 	22, 	0 
+
+
 
