@@ -104,31 +104,32 @@ function limpiar_datos(){
 
 
 
+
+//Función que convierte strings de números a integers:
+function a_decimales(arreglo) {
+
+    for (var i = 0; i < arreglo.length; i++) {
+        arreglo[i] = parseFloat(arreglo[i]);
+    }
+    
+        
+}
+
+
+
+
+
+
 /* 
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ERROR: 
 - si meto los datos en forma de un arreglo directamente, TODO funciona bien.
 Cuando los meto manualmente aparecen todos los errores.
 
-- Si los meto como un arreglo, no tira errores, pero en la consola aparecen los arreglos con valores que no
-deberían estar. Agrega valores al final y en Tx al principio.
+- Si los meto como un arreglo tira error en la consola a partir de Lx, y no muestra el resto en la tabla.
 
-
-* Me parece que el error está en que los arreglos no salen completamente limpios y ordenados para los cálculos
-siguientes.
-
-
--- cuando NO USO LA FUNCION LIMPIAR en otro script, algunos arreglos muestran los elementos correctos, otros
-tienen errores al parsear por los elementos, ej es i-1 en lugar de i y cosas así.
-
-
-Probando los resulatdos que devuelve la consola, no lo que muestra la tabla:
-arreglo lx: arreglado sacando la función filter_list
-arreglo dx: arreglado sacando la función filter_list y agregado un dx.pop() para sacar un NaN
-arreglo qx: arreglado sacando la función filter_list y agregado un qx.pop() para sacar un NaN
-arreglo Lx: arreglado sacando la función filter_list y agregado un Lx.pop()
-arreglo Tx:
-arreglo ex:
+* Probar de pasar TODO a int en TODAS las funciones.
+Resultado: probé de pasar la nx a int, pero no parece que haya errores. Creo que ya está pasada.
 
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 */ 
@@ -139,37 +140,19 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 // Función que obtiene los datos de los inputs y los carga en el arreglo nx de mas arriba:
 function tomar_datos_ingresados_nx(){
     
-    /*let datos_ingresados = document.getElementsByTagName("input");
+    let datos_ingresados = document.getElementsByTagName("input");
     
     for (var i = 0; i < datos_ingresados.length; i++) {
         
-        nx.push(parseInt(datos_ingresados[i].value));
+        nx.push(datos_ingresados[i].value);
 
-    } */
+    } 
 
-    nx = [996, 668, 295, 190, 176, 172, 167, 159, 154, 147, 105, 22, 0];
+    a_decimales(nx)
+
+    //nx = [996, 668, 295, 190, 176, 172, 167, 159, 154, 147, 105, 22, 0];
 
            
-}
-
-
-
-
-
-//FUNCION LIMPIADORA DE ARREGLOS
-//Toma un arreglo, pasa todo a int y elimina los elementos NaN, null, undefined, vacíos y strings. Por el tipo de toma de datos, algunas
-//funciones la requieren antes de pasar a los cálculos siguientes.
-function filter_list(l) {
-      //pasamos los valores a integers:  
-      l.push(parseInt(l));  
-      
-      //limpiamos el arreglo de todo lo que no sea integers:
-      return l.filter(x => typeof x === "number" &&
-        x !== null &&
-        x !== undefined &&
-        x !== '' &&
-        !Number.isNaN(x)
-        );
 }
 
 
@@ -186,7 +169,7 @@ function calcular_lx(){
         lx.push(nx[i]/nx[0]);  
     }
 
-
+    a_decimales(lx);
     
 }
 
@@ -202,6 +185,7 @@ function calcular_dx(){
     
     dx.pop();
 
+    a_decimales(dx);
 }
 
 
@@ -217,6 +201,7 @@ function calcular_qx(){
 
     
     qx.pop();
+    a_decimales(qx);
 
 }
 
@@ -231,6 +216,7 @@ function calcular_Lx(){
 
     
     Lx.pop();
+    a_decimales(Lx);
 
 
 }
@@ -238,18 +224,20 @@ function calcular_Lx(){
 
 // Calcular los valores de la columna Tx:  Números de días que les queda a los sobrevivientes que alcanzaron edad X:
 function calcular_Tx(){
-    var valor_actual = Lx[Lx.length - 2]; //asignamos el anteúltimo valor (el último es NaN) a valor_actual.
+    var valor_actual = Lx[Lx.length - 1]; //asignamos el anteúltimo valor (el último es NaN) a valor_actual.
     
     Tx.push(valor_actual); //metemos el valor_actual en el arreglo Tx.
         
 
     //esto itera por Lx desde el final, saltando los dos últimos lugares: uno el NaN y el otro el valor_actual.         
-    for (var i = Lx.length - 2; i >= 0; i--) { 
+    for (var i = Lx.length - 1; i >= 1; i--) { 
         suma = Lx[i-1] + valor_actual;
         Tx.push(suma);
 
         valor_actual = suma;
     }
+
+    a_decimales(Tx);
 
     
     
@@ -264,15 +252,14 @@ function calcular_ex(){
     //El arreglo Tx está invertido para facilitar la lectura, pero hay que invertirlo para los cálculos:
     var tx_invertido = Tx.reverse();
     
-    for (var i = 0; i < nx.length; i++) {
+    for (var i = 0; i < Tx.length; i++) {
         
-        ex.push(tx_invertido[i + 1] / nx[i]);  
+        ex.push(tx_invertido[i] / nx[i]);  
     }
-    
-    
-    ex = filter_list(ex);
 
-    
+
+    a_decimales(ex);
+
 }
 
 
@@ -331,7 +318,7 @@ function cargar_resultados(){
     // Cargamos los resultados de la columna lx:
     celdas_lx = document.getElementsByClassName("lx");
     
-        for (let i=0; i<celdas_lx.length; i++) {
+        for (let i=0; i<celdas_lx.length-1; i++) {
             celdas_lx[i].innerHTML = lx[i].toFixed(3);
     }
 
@@ -339,7 +326,7 @@ function cargar_resultados(){
     // Cargamos los resultados de la columna dx:
     celdas_dx = document.getElementsByClassName("dx");
     
-        for ( i=0; i<celdas_dx.length; i++) {
+        for ( i=0; i<celdas_dx.length-1; i++) {
             celdas_dx[i].innerHTML = dx[i].toFixed(3);
     }
 
@@ -347,7 +334,7 @@ function cargar_resultados(){
     // Cargamos los resultados de la columna qx:
     celdas_qx = document.getElementsByClassName("qx");
     
-        for ( i=0; i<celdas_qx.length; i++) {
+        for ( i=0; i<celdas_qx.length-1; i++) {
             celdas_qx[i].innerHTML = qx[i].toFixed(3);
     }
 
@@ -355,7 +342,7 @@ function cargar_resultados(){
     // Cargamos los resultados de la columna Lx:
     celdas_Lx = document.getElementsByClassName("Lx");
     
-        for ( i=0; i<celdas_Lx.length; i++) {
+        for ( i=0; i<celdas_Lx.length-1; i++) {
             celdas_Lx[i].innerHTML = Lx[i].toFixed(3);
     }
 
@@ -364,15 +351,15 @@ function cargar_resultados(){
     // Cargamos los resultados de la columna Tx:
     celdas_Tx = document.getElementsByClassName("Tx");
     
-        for ( i=0; i<celdas_Tx.length; i++) {
-            celdas_Tx[i].innerHTML = Tx[i + 1].toFixed(3);
+        for ( i=0; i<celdas_Tx.length-1; i++) {
+            celdas_Tx[i].innerHTML = Tx[i].toFixed(3);
     }
 
 
     // Cargamos los resultados de la columna ex:
     celdas_ex = document.getElementsByClassName("ex");
 
-        for ( i=0; i<celdas_ex.length; i++) {
+        for ( i=0; i<celdas_ex.length-1; i++) {
             celdas_ex[i].innerHTML = ex[i].toFixed(3);
     }
 
