@@ -38,14 +38,35 @@ var ex = [];
 
 
 // FUNCIONES:
+// Funcion limpiar
+function filter_list(l) {
+      //pasamos los valores a integers:  
+      l.push(parseInt(l));  
+      
+      //limpiamos el arreglo de todo lo que no sea integers:
+      return l.filter(x => typeof x === "number" &&
+        x !== null &&
+        x !== undefined &&
+        x !== '' &&
+        !Number.isNaN(x)
+        );
+}
+
+// No sé como funciona y está metiendo valores incorrectos. Sacar, modificar o aprender que mierda hace.
+
+
+
+
+
+
 // Calcular los valores de la columna lx: proporción de organismos supervivientes al empezar el intervalo de edad X
 function calcular_lx(){
 	
-	for (var i = 0; i < nx.length; i++) {
+	for (var i = 0; i < nx.length-1; i++) {
    		
    		lx.push(nx[i]/nx[0]);  
 	}
-	
+
 }
 
 
@@ -55,6 +76,8 @@ function calcular_dx(){
    		
    		dx.push(nx[i] - nx[i + 1]);  
 	}
+
+	dx.pop();
 
 }
 
@@ -67,6 +90,8 @@ function calcular_qx(){
    		qx.push(dx[i] / nx[i]);  
 	}
 
+	qx.pop();
+
 }
 
 
@@ -77,6 +102,7 @@ function calcular_Lx(){
    		Lx.push((nx[i] + nx[i + 1]) / 2);  
 	}
 
+	Lx.pop();
 
 }
 
@@ -96,6 +122,8 @@ function calcular_Tx(){
     	valor_actual = suma;
 	}
 
+
+	
 
 
 }
@@ -126,16 +154,28 @@ calcular_ex()
 
 
 console.log("arreglo nx: " + nx)
+console.log()
+
 console.log("arreglo lx: " + lx)
+console.log()
+
 console.log("arreglo dx: " + dx)
+console.log()
+
 console.log("arreglo qx: " + qx)
+console.log()
+
 console.log("arreglo Lx: " + Lx)
+console.log()
+
 console.log("arreglo Tx: " + Tx)
-console.log("arreglo ex: " + ex)
+console.log()
+
+//console.log("arreglo ex: " + ex)
 
 
 
-
+/*
 // Funcion de prueba que remueve los NaN: funciona.
 const results = ex.filter(element => {
   return (
@@ -146,5 +186,6 @@ const results = ex.filter(element => {
   );
 });
 
+*/
 
 

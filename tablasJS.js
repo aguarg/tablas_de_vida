@@ -104,20 +104,52 @@ function limpiar_datos(){
 
 
 
+/* 
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+ERROR: 
+- si meto los datos en forma de un arreglo directamente, TODO funciona bien.
+Cuando los meto manualmente aparecen todos los errores.
+
+- Si los meto como un arreglo, no tira errores, pero en la consola aparecen los arreglos con valores que no
+deberían estar. Agrega valores al final y en Tx al principio.
+
+
+* Me parece que el error está en que los arreglos no salen completamente limpios y ordenados para los cálculos
+siguientes.
+
+
+-- cuando NO USO LA FUNCION LIMPIAR en otro script, algunos arreglos muestran los elementos correctos, otros
+tienen errores al parsear por los elementos, ej es i-1 en lugar de i y cosas así.
+
+
+Probando los resulatdos que devuelve la consola, no lo que muestra la tabla:
+arreglo lx: arreglado sacando la función filter_list
+arreglo dx: arreglado sacando la función filter_list y agregado un dx.pop() para sacar un NaN
+arreglo qx: arreglado sacando la función filter_list y agregado un qx.pop() para sacar un NaN
+arreglo Lx: arreglado sacando la función filter_list y agregado un Lx.pop()
+arreglo Tx:
+arreglo ex:
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+*/ 
+
 
 
 // FUNCION QUE OBTIENE LOS DATOS INGRESADOS POR EL USUARIO ========================================
 // Función que obtiene los datos de los inputs y los carga en el arreglo nx de mas arriba:
 function tomar_datos_ingresados_nx(){
     
-    let datos_ingresados = document.getElementsByTagName("input");
+    /*let datos_ingresados = document.getElementsByTagName("input");
+    
     for (var i = 0; i < datos_ingresados.length; i++) {
         
         nx.push(parseInt(datos_ingresados[i].value));
 
-    }
- 
-    
+    } */
+
+    nx = [996, 668, 295, 190, 176, 172, 167, 159, 154, 147, 105, 22, 0];
+
+           
 }
 
 
@@ -148,10 +180,14 @@ function filter_list(l) {
 
 // Calcular los valores de la columna lx: proporción de organismos supervivientes al empezar el intervalo de edad X
 function calcular_lx(){
-    for (var i = 0; i < nx.length; i++) {
+    
+    for (var i = 0; i < nx.length-1; i++) {
         
         lx.push(nx[i]/nx[0]);  
     }
+
+
+    
 }
 
 
@@ -164,7 +200,7 @@ function calcular_dx(){
 
     }
     
-    dx = filter_list(dx);
+    dx.pop();
 
 }
 
@@ -180,7 +216,7 @@ function calcular_qx(){
     }
 
     
-    qx = filter_list(qx);
+    qx.pop();
 
 }
 
@@ -194,7 +230,7 @@ function calcular_Lx(){
     }
 
     
-    Lx = filter_list(Lx);
+    Lx.pop();
 
 
 }
@@ -216,15 +252,11 @@ function calcular_Tx(){
     }
 
     
-    Tx = filter_list(Tx);
-
+    
 }
 
 
 
-//ERROR: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-// ex muestra un resultado extra al final: sacar del arreglo.
-// Tx muestra un resultado al inicio: sacar del arreglo.
 
 
 // Calcular los valores de la columna ex: esperanza media de vida para los organismo al comienzo de la edad X
@@ -270,7 +302,7 @@ function calcular(){
     calcular_Lx()
     calcular_Tx()
     calcular_ex()
-
+    
 
 
     console.log("arreglo nx: " + nx)
@@ -333,7 +365,7 @@ function cargar_resultados(){
     celdas_Tx = document.getElementsByClassName("Tx");
     
         for ( i=0; i<celdas_Tx.length; i++) {
-            celdas_Tx[i].innerHTML = Tx[i].toFixed(3);
+            celdas_Tx[i].innerHTML = Tx[i + 1].toFixed(3);
     }
 
 
