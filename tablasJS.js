@@ -1,3 +1,4 @@
+var x = [];
 var nx = [];
 var lx = [];
 var dx = [];
@@ -20,17 +21,19 @@ function agregar_fila(){
   var fila = tabla.insertRow(-1);
 
   // Se crean las celdas y se las asigna a fila, creada mas arriba:
-  var fila_nx = fila.insertCell(0);
-  var fila_lx = fila.insertCell(1);
-  var fila_dx = fila.insertCell(2);
-  var fila_qx = fila.insertCell(3);
-  var fila_Lx = fila.insertCell(4);
-  var fila_Tx = fila.insertCell(5);
-  var fila_ex = fila.insertCell(6);
+  var fila_x = fila.insertCell(0); 
+  var fila_nx = fila.insertCell(1);
+  var fila_lx = fila.insertCell(2);
+  var fila_dx = fila.insertCell(3);
+  var fila_qx = fila.insertCell(4);
+  var fila_Lx = fila.insertCell(5);
+  var fila_Tx = fila.insertCell(6);
+  var fila_ex = fila.insertCell(7);
 
     
   // agregamos un input a la celda nx:
-  fila_nx.innerHTML = '<input>';
+  fila_x.innerHTML = '<input class="input1">';
+  fila_nx.innerHTML = '<input class="input2">';
   
   // Les damos dos clases a los elementos que creamos mas arriba:
   fila_lx.className = "celda lx";
@@ -69,7 +72,7 @@ function borrar_fila(){
 function limpiar_datos(){
     //Limpiando los inputs de la tabla, no el resto de las celdas:
     let elementos_input = [] ;
-    elementos_input = document.getElementsByTagName("input");
+    elementos_input = document.getElementsByClassName("input1");
 
     for(var i=0; i<elementos_input.length ; i++){
        elementos_input[i].value = "" ;
@@ -90,6 +93,7 @@ function limpiar_datos(){
 
     
     // Vaciando los arreglos con los datos calculados, de otra forma suma los elementos a los nuevos:
+    x = [];
     nx = [];
     lx = [];
     dx = [];
@@ -120,27 +124,11 @@ function a_decimales(arreglo) {
 
 
 
-/* 
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-ERROR: 
-- si meto los datos en forma de un arreglo directamente, TODO funciona bien.
-Cuando los meto manualmente aparecen todos los errores.
-
-- Si los meto como un arreglo tira error en la consola a partir de Lx, y no muestra el resto en la tabla.
-
-* Probar de pasar TODO a int en TODAS las funciones.
-Resultado: probé de pasar la nx a int, pero no parece que haya errores. Creo que ya está pasada.
-
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-*/ 
-
-
-
 // FUNCION QUE OBTIENE LOS DATOS INGRESADOS POR EL USUARIO ========================================
 // Función que obtiene los datos de los inputs y los carga en el arreglo nx de mas arriba:
 function tomar_datos_ingresados_nx(){
     
-    let datos_ingresados = document.getElementsByTagName("input");
+    let datos_ingresados = document.getElementsByClassName("input2");
     
     for (var i = 0; i < datos_ingresados.length; i++) {
         
@@ -270,6 +258,7 @@ function calcular_ex(){
 // Hacemos los cálculos. Esta función está enlazada al bótón "Calcular" de la app:
 function calcular(){
     // Creamos arreglos para guardar los valores calculados:
+    x = [];
     nx = [];
     lx = [];
     dx = [];
@@ -374,3 +363,34 @@ function cargar_resultados(){
 function exportar_resultados(){
     
 }
+
+
+
+
+
+// GRAFICA ==========================================================================================
+/*
+var xValues = [50,60,70,80,90,100,110,120,130,140,150];
+var yValues = [7,8,8,9,9,9,10,11,14,14,15];
+
+new Chart("myChart", {
+  type: "line",
+  data: {
+    labels: xValues,
+    datasets: [{
+      fill: false,
+      lineTension: 0,
+      backgroundColor: "rgba(0,0,255,1.0)",
+      borderColor: "rgba(0,0,255,0.1)",
+      data: yValues
+    }]
+  },
+  options: {
+    legend: {display: false},
+    scales: {
+      yAxes: [{ticks: {min: 6, max:16}}],
+    }
+  }
+});
+
+*/
