@@ -31,7 +31,7 @@ function agregar_fila(){
   var fila_ex = fila.insertCell(7);
 
     
-  // agregamos un input a la celda nx:
+  // agregamos dos input a la tabla: x y nx:
   fila_x.innerHTML = '<input class="input1">';
   fila_nx.innerHTML = '<input class="input2">';
   
@@ -72,13 +72,15 @@ function borrar_fila(){
 function limpiar_datos(){
     //Limpiando los inputs de la tabla, no el resto de las celdas:
     let elementos_input = [] ;
-    elementos_input = document.getElementsByClassName("input1");
+    elementos_input = document.getElementsByTagName("input");
 
     for(var i=0; i<elementos_input.length ; i++){
        elementos_input[i].value = "" ;
 
 
     } 
+
+    
 
 
     //Limpiando las celdas de la tabla:
@@ -125,7 +127,7 @@ function a_decimales(arreglo) {
 
 
 // FUNCION QUE OBTIENE LOS DATOS INGRESADOS POR EL USUARIO ========================================
-// Función que obtiene los datos de los inputs y los carga en el arreglo nx de mas arriba:
+// Función que obtiene los datos de los inputs x y nx, y los mete en respectivos arreglos:
 function tomar_datos_ingresados_nx(){
     
     let datos_ingresados = document.getElementsByClassName("input2");
@@ -138,7 +140,17 @@ function tomar_datos_ingresados_nx(){
 
     a_decimales(nx)
 
-    //nx = [996, 668, 295, 190, 176, 172, 167, 159, 154, 147, 105, 22, 0];
+    
+
+
+    //Obtiene los datos de los inputs de la columna x:
+    let datos_x = document.getElementsByClassName("input1");
+    
+    for (var i = 0; i < datos_x.length; i++) {
+        
+        x.push(datos_x[i].value);
+
+    } 
 
            
 }
@@ -278,6 +290,8 @@ function calcular(){
     calcular_Lx()
     calcular_Tx()
     calcular_ex()
+
+    hacer_grafica();
     
 
 
@@ -365,32 +379,42 @@ function exportar_resultados(){
 }
 
 
+// FUNCIÓN PARA EL BOTÓN TEST
+function test(){
 
+    //nx = [996, 668, 295, 190, 176, 172, 167, 159, 154, 147, 105, 22, 0];
+
+
+
+
+
+}
 
 
 // GRAFICA ==========================================================================================
-/*
-var xValues = [50,60,70,80,90,100,110,120,130,140,150];
-var yValues = [7,8,8,9,9,9,10,11,14,14,15];
+function hacer_grafica() {
+    
+    var xValues = x;
+    var yValues = nx;
 
-new Chart("myChart", {
-  type: "line",
-  data: {
-    labels: xValues,
-    datasets: [{
-      fill: false,
-      lineTension: 0,
-      backgroundColor: "rgba(0,0,255,1.0)",
-      borderColor: "rgba(0,0,255,0.1)",
-      data: yValues
-    }]
-  },
-  options: {
-    legend: {display: false},
-    scales: {
-      yAxes: [{ticks: {min: 6, max:16}}],
-    }
-  }
-});
+    new Chart("myChart", {
+      type: "line",
+      data: {
+        labels: xValues,
+        datasets: [{
+          fill: false,
+          lineTension: 0,
+          backgroundColor: "rgba(0,0,255,1.0)",
+          borderColor: "rgba(0,0,255,0.1)",
+          data: yValues
+        }]
+      },
+      options: {
+        legend: {display: false},
+        scales: {
+          yAxes: [{ticks: {min: 6, max:nx[-1]}}], //máximo valor de "y" como el último elemento de nx.
+        }
+      }
+    });
 
-*/
+}
