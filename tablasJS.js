@@ -1,3 +1,4 @@
+var x = [];
 var nx = [];
 var lx = [];
 var dx = [];
@@ -20,17 +21,19 @@ function agregar_fila(){
   var fila = tabla.insertRow(-1);
 
   // Se crean las celdas y se las asigna a fila, creada mas arriba:
-  var fila_nx = fila.insertCell(0);
-  var fila_lx = fila.insertCell(1);
-  var fila_dx = fila.insertCell(2);
-  var fila_qx = fila.insertCell(3);
-  var fila_Lx = fila.insertCell(4);
-  var fila_Tx = fila.insertCell(5);
-  var fila_ex = fila.insertCell(6);
+  var fila_x = fila.insertCell(0); 
+  var fila_nx = fila.insertCell(1);
+  var fila_lx = fila.insertCell(2);
+  var fila_dx = fila.insertCell(3);
+  var fila_qx = fila.insertCell(4);
+  var fila_Lx = fila.insertCell(5);
+  var fila_Tx = fila.insertCell(6);
+  var fila_ex = fila.insertCell(7);
 
     
-  // agregamos un input a la celda nx:
-  fila_nx.innerHTML = '<input>';
+  // agregamos dos input a la tabla: x y nx:
+  fila_x.innerHTML = '<input class="input1">';
+  fila_nx.innerHTML = '<input class="input2">';
   
   // Les damos dos clases a los elementos que creamos mas arriba:
   fila_lx.className = "celda lx";
@@ -77,6 +80,8 @@ function limpiar_datos(){
 
     } 
 
+    
+
 
     //Limpiando las celdas de la tabla:
     let valores_celdas = [] ;
@@ -90,6 +95,7 @@ function limpiar_datos(){
 
     
     // Vaciando los arreglos con los datos calculados, de otra forma suma los elementos a los nuevos:
+    x = [];
     nx = [];
     lx = [];
     dx = [];
@@ -120,27 +126,11 @@ function a_decimales(arreglo) {
 
 
 
-/* 
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-ERROR: 
-- si meto los datos en forma de un arreglo directamente, TODO funciona bien.
-Cuando los meto manualmente aparecen todos los errores.
-
-- Si los meto como un arreglo tira error en la consola a partir de Lx, y no muestra el resto en la tabla.
-
-* Probar de pasar TODO a int en TODAS las funciones.
-Resultado: probé de pasar la nx a int, pero no parece que haya errores. Creo que ya está pasada.
-
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-*/ 
-
-
-
 // FUNCION QUE OBTIENE LOS DATOS INGRESADOS POR EL USUARIO ========================================
-// Función que obtiene los datos de los inputs y los carga en el arreglo nx de mas arriba:
+// Función que obtiene los datos de los inputs x y nx, y los mete en respectivos arreglos:
 function tomar_datos_ingresados_nx(){
     
-    let datos_ingresados = document.getElementsByTagName("input");
+    let datos_ingresados = document.getElementsByClassName("input2");
     
     for (var i = 0; i < datos_ingresados.length; i++) {
         
@@ -150,7 +140,17 @@ function tomar_datos_ingresados_nx(){
 
     a_decimales(nx)
 
-    //nx = [996, 668, 295, 190, 176, 172, 167, 159, 154, 147, 105, 22, 0];
+    
+
+
+    //Obtiene los datos de los inputs de la columna x:
+    let datos_x = document.getElementsByClassName("input1");
+    
+    for (var i = 0; i < datos_x.length; i++) {
+        
+        x.push(datos_x[i].value);
+
+    } 
 
            
 }
@@ -270,6 +270,7 @@ function calcular_ex(){
 // Hacemos los cálculos. Esta función está enlazada al bótón "Calcular" de la app:
 function calcular(){
     // Creamos arreglos para guardar los valores calculados:
+    x = [];
     nx = [];
     lx = [];
     dx = [];
@@ -289,6 +290,8 @@ function calcular(){
     calcular_Lx()
     calcular_Tx()
     calcular_ex()
+
+    hacer_grafica();
     
 
 
@@ -373,4 +376,45 @@ function cargar_resultados(){
 //Función para exportar los resultados en un archivo:
 function exportar_resultados(){
     
+}
+
+
+// FUNCIÓN PARA EL BOTÓN TEST
+function test(){
+
+    //nx = [996, 668, 295, 190, 176, 172, 167, 159, 154, 147, 105, 22, 0];
+
+
+
+
+
+}
+
+
+// GRAFICA ==========================================================================================
+function hacer_grafica() {
+    
+    var xValues = x;
+    var yValues = nx;
+
+    new Chart("myChart", {
+      type: "line",
+      data: {
+        labels: xValues,
+        datasets: [{
+          fill: false,
+          lineTension: 0,
+          backgroundColor: "rgba(0,0,255,1.0)",
+          borderColor: "rgba(0,0,255,0.1)",
+          data: yValues
+        }]
+      },
+      options: {
+        legend: {display: false},
+        scales: {
+          yAxes: [{ticks: {min: 6, max:nx[-1]}}], //máximo valor de "y" como el último elemento de nx.
+        }
+      }
+    });
+
 }

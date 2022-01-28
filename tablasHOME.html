@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="tablasEstilos.css">
     <script type="text/javascript" src="tablasJS.js"></script>
 
+    <!--Gráfica-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
 
     
 
@@ -33,6 +36,7 @@
 
     <table id="tabla">
       <tr>
+        <th>x</th>
         <th>nx</th> <!--th es table header-->
         <th>lx</th>
         <th>dx</th>
@@ -43,7 +47,8 @@
       </tr>
       
       <tr>
-        <td><input type="text"></td>
+        <td><input type="text" class="input1"></td>
+        <td><input type="text" class="input2"></td>
         <td class="celda lx"></td>
         <td class="celda dx"></td>
         <td class="celda qx"></td>
@@ -65,6 +70,10 @@
 
 
 
+    <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+    
+        
+    
     
 
 </body>
