@@ -1,4 +1,3 @@
-/*El css está bien linkeado*/
 
 h1 {
 
@@ -7,24 +6,50 @@ h1 {
 
 
 
-table, th, td {
-  border:1px solid black;
+
+/*TABLA*/
+table, td {
+  border:1px solid gray;
+  border-collapse: collapse;
+  padding: 10px;
+  margin: 10px;
+
+}
+
+td {
+  width: 30px;
+}
+
+th {
+  background-color: darkgrey;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+
+
+
+/*CONTENEDOR BOTONES DE LA APP*/
+.cont_botones_app {
+  background-color: blue;
   padding: 15px;
   margin: 15px;
 }
 
 
-.cont_botones_app {
-  background-color: blue;
-}
 
-
-
+/*CONTENEDOR BOTONES DE LA TABLA*/
 .cont_botones_tabla {
+  padding: 15px;
+  margin: 15px;  
 
 }
 
 
+
+/*INPUTS*/
 input {
-  width: 50px;
+  width: 30px;
 }

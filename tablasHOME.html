@@ -21,20 +21,23 @@
 </head>
 
 <body>
+    
+    <!--Encabezado-->
     <header>
         <h1>Cálculo de tablas de vida</h1>
         <h3>Explicacion breve de que mierda hace esto</h3>
     </header>
 
-
+    <!--Contenedor de los botones superiores-->
     <div class="cont_botones_app">
         <button onclick="calcular()">Calcular</button>
-        <button onclick="exportar_resultados()">Exportar resultados</button>
         <button onclick="limpiar_datos()">Limpiar tabla</button>
         <button onclick="test()" id="boton_test">Test</button>
 
     </div>
 
+
+    <!--Tabla: contiene todas las filas y las columnas-->
     <table id="tabla">
       <tr>
         <th>x</th>
@@ -63,16 +66,27 @@
       
     </table> 
 
+
+    <!--Contenedor de los botones inferiores de la tabla-->
     <div class="cont_botones_tabla">
         <button onclick="agregar_fila()">Agregar fila</button>
         <button onclick="borrar_fila()">Borrar fila</button>
     </div>
 
 
+    <!--Div que contiene el título de la gráfica y la gráfica-->
+    <div class="contenedor_del_grafico">
+        <h3>Número de supervivientes Vs. Intervalos</h3>
+        
+        <!--Gráfica-->
+        <canvas id="myChart" 
+            style="width:100%;
+            max-width:600px";
+        >
+            
 
-
-    <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
-    
+        </canvas>
+    </div>
         
     
     

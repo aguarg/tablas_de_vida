@@ -1,3 +1,38 @@
+/*
+=========================================================================
+                            ÍNDICE / INDEX
+=========================================================================
+1- FUNCIONES LINKEADAS A LOS BOTONES / FUNCTIONS LINKED TO BUTTONS:
+    1.1- Función que agrega filas a la tabla / Function that add rows to the table.
+    1.2- Función que borra filas de la tabla / Function that delets rows from the table.
+    1.3- Función para limpiar la tabla / Function that resets the whole table.
+
+2- FUNCIÓN QUE OBTIENE LOS DATOS INGRESADOS POR EL USUARIO / FUNCTION THAT GETS DATA FROM USER.
+
+3- FUNCIONES PARA LOS CÁLCULOS / FUNCTIONS THAT CALCULATE THE VALUES
+    3.1- Calcular el valor lx / Solve lx values.
+    3.2- Calcular el valor dx / Solve dx values.
+    3.3- Calcular el valor qx / Solve qx values.
+    3.4- Calcular el valor Lx / Solve Lx values.
+    3.5- Calcular el valor Tx / Solve Tx values.
+    3.6- Calcular el valor ex / Solve ex values.
+
+    3.7- Función que llama a las funciones para calcular / Function that calls the previous functions.
+
+    4- FUNCIÓN QUE CARGA LOS RESULTADOS A LA TABLA / FUNCTION THAT UPLOADS THE RESULTS TO THE TABLE.
+
+    5- FUNCIÓN TEST / TEST FUNCTION.
+    Si no sabés con qué datos llenar la tabla, clickear el botón "test" para generarlos automáticamente.
+    If you don't know how to fill the table, click "test" button to automatically fill it.
+
+    6- FUNCIÓN PARA HACER LA GRÁFICA / FUNCTION TO SHOW THE GRAPHIC.
+    Usa chart.js / it uses chart.js
+
+*/
+
+
+
+// Generamos los arreglos / Creates the arryays:
 var x = [];
 var nx = [];
 var lx = [];
@@ -12,8 +47,8 @@ var ex = [];
 
 
 
-//FUNCIONES PARA LOS BOTONES DE LA APP: ===========================================================
-//Función que agrega una fila al final de la tabla:
+// 1- FUNCIONES PARA LOS BOTONES DE LA APP: ====================================================
+//1.1- FUNCIÓN QUE AGREGA UNA FILA A LA TABLA / FUNCTION THAT ADDS A ROW TO THE TABLE:
 function agregar_fila(){
   var tabla = document.getElementById("tabla");
 
@@ -49,17 +84,17 @@ function agregar_fila(){
 
 
 
-// FUNCIÓN PARA BORRAR FILAS, de a una y empezando desde la última ===========================================
+// 1.2- FUNCIÓN PARA BORRAR FILAS / FUNCTION THAT DELETS ROWS ===========================================
 function borrar_fila(){
   // Obtenemos la cantidad de filas (elementos <tr>):
   let cantidad_de_filas = document.getElementsByTagName("tr").length;
 
   if (cantidad_de_filas < 3) {
-    alert("Máximo número de filas eliminadas")
+    //alert("Máximo número de filas eliminadas")
   
   } else {
       
-      document.getElementById("tabla").deleteRow(-1);
+      document.getElementById("tabla").deleteRow(-1); //el -1 indica que empezamos desde el final.
 
   }
 
@@ -67,7 +102,7 @@ function borrar_fila(){
 
 
 
-//FUNCIÓN PARA BORRAR TODO =========================================================================
+//1.3- FUNCIÓN PARA LIMPIAR LA TABLA / FUNCTION THAT CLEANS THE TABLE: =========================================================================
 //Función que vacía los inputs, los arreglos, los valores de las celdas, la gráfica y las filas menos una sola:
 function limpiar_datos(){
     //Limpiando los inputs de la tabla, no el resto de las celdas:
@@ -93,11 +128,18 @@ function limpiar_datos(){
       valores_celdas[j].innerHTML = "<td></td>";
 
       
-      //borra las filas menos una sola. ERROR: si la tabla esta vacía, trata de borrar todo igual y aparecen alerts
-      borrar_fila();
+      //borra las filas menos una sola. 
+      //ERROR: si la tabla esta vacía, trata de borrar todo igual y aparecen alerts.
+      //el borrar_fila() se ejecuta el número de celdas y debería ser el número de filas -1
+      //borrar_fila();
+
+    
     }
 
-
+    filas_a_borrar = document.getElementsByTagName("tr").length;
+    for (var k = 0; k < filas_a_borrar - 1; k++) {
+        borrar_fila();
+    }
     
     // Vaciando los arreglos con los datos calculados, de otra forma suma los elementos a los nuevos:
     x = [];
@@ -138,7 +180,7 @@ function a_decimales(arreglo) {
 
 
 
-// FUNCION QUE OBTIENE LOS DATOS INGRESADOS POR EL USUARIO ========================================
+//2- FUNCION QUE OBTIENE LOS DATOS INGRESADOS POR EL USUARIO ========================================
 // Función que obtiene los datos de los inputs x y nx, y los mete en respectivos arreglos:
 //dice nx porque era una función solo para nx, pero le agregué lo de x de paso.
 function tomar_datos_ingresados_nx(){
@@ -172,9 +214,9 @@ function tomar_datos_ingresados_nx(){
 
 
 
-// FUNCIONES PARA HACER LOS CÁLCULOS ================================================================
+// 3- FUNCIONES PARA HACER LOS CÁLCULOS ================================================================
 
-// Calcular los valores de la columna lx: proporción de organismos supervivientes al empezar el intervalo de edad X
+// 3.1- Calcular los valores de la columna lx: proporción de organismos supervivientes al empezar el intervalo de edad X
 function calcular_lx(){
     
     for (var i = 0; i < nx.length-1; i++) {
@@ -187,7 +229,7 @@ function calcular_lx(){
 }
 
 
-// Calcular los valores de la columna dx: número de muertes durante el intervalo de edad X a X+1
+// 3.2- Calcular los valores de la columna dx: número de muertes durante el intervalo de edad X a X+1
 function calcular_dx(){
     
     for (var i = 0; i < nx.length; i++) {
@@ -204,7 +246,7 @@ function calcular_dx(){
 
 
 
-// Calcular los valores de la columna qx: Tasa de mortalidad:
+// 3.3- Calcular los valores de la columna qx: Tasa de mortalidad:
 function calcular_qx(){
     
     for (var i = 0; i < nx.length; i++) {
@@ -219,7 +261,7 @@ function calcular_qx(){
 }
 
 
-// Calcular los valores de la columna Lx: núm promedio de sobrevivientes durante el intervalo de edad X a X+1
+// 3.4- Calcular los valores de la columna Lx: núm promedio de sobrevivientes durante el intervalo de edad X a X+1
 function calcular_Lx(){
     for (var i = 0; i < nx.length; i++) {
         
@@ -235,7 +277,7 @@ function calcular_Lx(){
 }
 
 
-// Calcular los valores de la columna Tx:  Números de días que les queda a los sobrevivientes que alcanzaron edad X:
+// 3.5- Calcular los valores de la columna Tx:  Números de días que les queda a los sobrevivientes que alcanzaron edad X:
 function calcular_Tx(){
     var valor_actual = Lx[Lx.length - 1]; //asignamos el anteúltimo valor (el último es NaN) a valor_actual.
     
@@ -260,7 +302,7 @@ function calcular_Tx(){
 
 
 
-// Calcular los valores de la columna ex: esperanza media de vida para los organismo al comienzo de la edad X
+// 3.6- Calcular los valores de la columna ex: esperanza media de vida para los organismo al comienzo de la edad X
 function calcular_ex(){
     //El arreglo Tx está invertido para facilitar la lectura, pero hay que invertirlo para los cálculos:
     var tx_invertido = Tx.reverse();
@@ -280,7 +322,7 @@ function calcular_ex(){
 
 
 
-// Hacemos los cálculos. Esta función está enlazada al bótón "Calcular" de la app:
+// 3.7- Hacemos los cálculos. Esta función está enlazada al bótón "Calcular" de la app:
 function calcular(){
     // Creamos arreglos para guardar los valores calculados:
     x = [];
@@ -327,7 +369,7 @@ function calcular(){
 
 
 
-//Función que carga los datos de los arreglos a la tabla:
+// 4- Función que carga los datos de los arreglos a la tabla / Uploading the results to the table:
 function cargar_resultados(){
     
     // Cargamos los resultados de la columna lx:
@@ -342,7 +384,7 @@ function cargar_resultados(){
     celdas_dx = document.getElementsByClassName("dx");
     
         for ( i=0; i<celdas_dx.length-1; i++) {
-            celdas_dx[i].innerHTML = dx[i].toFixed(3);
+            celdas_dx[i].innerHTML = dx[i].toFixed(1);
     }
 
 
@@ -358,7 +400,7 @@ function cargar_resultados(){
     celdas_Lx = document.getElementsByClassName("Lx");
     
         for ( i=0; i<celdas_Lx.length-1; i++) {
-            celdas_Lx[i].innerHTML = Lx[i].toFixed(3);
+            celdas_Lx[i].innerHTML = Lx[i].toFixed(1);
     }
 
 
@@ -367,7 +409,7 @@ function cargar_resultados(){
     celdas_Tx = document.getElementsByClassName("Tx");
     
         for ( i=0; i<celdas_Tx.length-1; i++) {
-            celdas_Tx[i].innerHTML = Tx[i].toFixed(3);
+            celdas_Tx[i].innerHTML = Tx[i].toFixed(1);
     }
 
 
@@ -382,19 +424,9 @@ function cargar_resultados(){
 }
 
 
-// FUNCION PARA EXPORTAR LOS RESULTADOS ============================================================
 
 
-//Función para exportar los resultados en un archivo:
-function exportar_resultados(){
-    alert("Terminame, rata")
-}
-
-
-
-
-
-// FUNCIÓN PARA EL BOTÓN TEST: ======================================================================
+// 5- FUNCIÓN TEST (linkeada al botón "test")/ TEST FUNCTION (linked to "test" button): ======================================================================
 
 function test(){
 
@@ -452,7 +484,7 @@ function test(){
 }
 
 
-// GRAFICA ==========================================================================================
+// 6- GRAFICA / GRAPHIC ==========================================================================================
 function hacer_grafica() {
     
     var xValues = x;
