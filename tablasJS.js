@@ -92,7 +92,8 @@ function limpiar_datos(){
       //vacía las celdas que no son inputs:
       valores_celdas[j].innerHTML = "<td></td>";
 
-      //borra las filas menos una sola:
+      
+      //borra las filas menos una sola. ERROR: si la tabla esta vacía, trata de borrar todo igual y aparecen alerts
       borrar_fila();
     }
 
@@ -114,6 +115,8 @@ function limpiar_datos(){
     //deja la gráfica vacía, solo los ejes:
     hacer_grafica();
 
+    //Habilita el botón test, por si hicieron click en "test", que deshabilita el botón:
+    document.getElementById("boton_test").disabled = false;
 
 }
 
@@ -302,9 +305,8 @@ function calcular(){
     calcular_ex()
 
     hacer_grafica();
-    
 
-
+    //Esto es para ver si los cálculos están bien. Borrarlos cuando esté terminada.
     console.log("arreglo nx: " + nx)
     console.log("arreglo lx: " + lx)
     console.log("arreglo dx: " + dx)
@@ -393,12 +395,7 @@ function exportar_resultados(){
 
 
 // FUNCIÓN PARA EL BOTÓN TEST: ======================================================================
-/*
-Funciona! Pero no está cargando los datos de los arreglos en las celdas x y en nx:
-    - cargar los valores de x y de nx en los inputs (tal vez lo pueda ahcer en el paso anterior)
-    - agrega 12 filas cada vez que apreto test
-    
-*/
+
 function test(){
 
 
@@ -435,8 +432,22 @@ function test(){
     hacer_grafica();
     
 
-    // Cargamos los resultados en las celdas de la tabla:
+    // Cargamos los resultados en las celdas NO INPUT de la tabla:
     cargar_resultados()
+
+    // Cargamos los resultados de las columnas input x y nx:
+    valores_celdas_x = document.getElementsByClassName("input1");
+    valores_celdas_nx = document.getElementsByClassName("input2");
+
+    for (var i = 0; i < valores_celdas_x.length; i++) {
+          valores_celdas_x[i].value = x[i];
+          valores_celdas_nx[i].value = nx[i];
+
+    }
+    
+
+    //Inhabilita el botón "test", terminando con la prueba. Al limpiar la tabla se vuelve a habilitar.
+    document.getElementById("boton_test").disabled = true; 
 
 }
 

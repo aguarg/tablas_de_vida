@@ -1,11 +1,8 @@
 HACER
-- Agregar el botón TEST
-
-- Seguir la función que conecte al botón test: debe tener dos arreglos, el x y el nx.
-Capaz que hacer esta función siga los pasos de la función calcular(), y que llame a las otras funciones, así no complico las funciones que ya están. Que TEST sea como un by-pass.
 
 - Agregar un botón para descargar los datos.
 Ver si se puede generar un PDF o un txt.
+
 
 - darle estilo. Pero esto al final, cuando todo lo demás funcione bien.
 
