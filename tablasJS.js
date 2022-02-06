@@ -49,7 +49,7 @@ function agregar_fila(){
 
 
 
-// Función para borrar filas, empezando desde la última:
+// FUNCIÓN PARA BORRAR FILAS, de a una y empezando desde la última ===========================================
 function borrar_fila(){
   // Obtenemos la cantidad de filas (elementos <tr>):
   let cantidad_de_filas = document.getElementsByTagName("tr").length;
@@ -67,8 +67,8 @@ function borrar_fila(){
 
 
 
-
-//Función que vacía los inputs, los arreglos y borra los valores de las celdas:
+//FUNCIÓN PARA BORRAR TODO =========================================================================
+//Función que vacía los inputs, los arreglos, los valores de las celdas, la gráfica y las filas menos una sola:
 function limpiar_datos(){
     //Limpiando los inputs de la tabla, no el resto de las celdas:
     let elementos_input = [] ;
@@ -83,13 +83,18 @@ function limpiar_datos(){
     
 
 
-    //Limpiando las celdas de la tabla:
+    //Limpiando las celdas de la tabla y borrando las filas menos una:
     let valores_celdas = [] ;
     valores_celdas = document.getElementsByClassName("celda");
     
     
     for (var j=0; j<valores_celdas.length; j++) {
-      valores_celdas[j].innerHTML = "<td></td>"
+      //vacía las celdas que no son inputs:
+      valores_celdas[j].innerHTML = "<td></td>";
+
+      
+      //borra las filas menos una sola. ERROR: si la tabla esta vacía, trata de borrar todo igual y aparecen alerts
+      borrar_fila();
     }
 
 
@@ -104,8 +109,15 @@ function limpiar_datos(){
     Tx = [];
     ex = [];
 
+    
+    
 
-     
+    //deja la gráfica vacía, solo los ejes:
+    hacer_grafica();
+
+    //Habilita el botón test, por si hicieron click en "test", que deshabilita el botón:
+    document.getElementById("boton_test").disabled = false;
+
 }
 
 
@@ -128,6 +140,7 @@ function a_decimales(arreglo) {
 
 // FUNCION QUE OBTIENE LOS DATOS INGRESADOS POR EL USUARIO ========================================
 // Función que obtiene los datos de los inputs x y nx, y los mete en respectivos arreglos:
+//dice nx porque era una función solo para nx, pero le agregué lo de x de paso.
 function tomar_datos_ingresados_nx(){
     
     let datos_ingresados = document.getElementsByClassName("input2");
@@ -292,9 +305,8 @@ function calcular(){
     calcular_ex()
 
     hacer_grafica();
-    
 
-
+    //Esto es para ver si los cálculos están bien. Borrarlos cuando esté terminada.
     console.log("arreglo nx: " + nx)
     console.log("arreglo lx: " + lx)
     console.log("arreglo dx: " + dx)
@@ -375,18 +387,67 @@ function cargar_resultados(){
 
 //Función para exportar los resultados en un archivo:
 function exportar_resultados(){
-    
+    alert("Terminame, rata")
 }
 
 
-// FUNCIÓN PARA EL BOTÓN TEST
+
+
+
+// FUNCIÓN PARA EL BOTÓN TEST: ======================================================================
+
 function test(){
 
-    //nx = [996, 668, 295, 190, 176, 172, 167, 159, 154, 147, 105, 22, 0];
+
+    x = [];
+    nx = [];
+    lx = [];
+    dx = [];
+    qx = [];
+    Lx = [];
+    Tx = [];
+    ex = [];
 
 
 
+    //Dos arreglos de valores para probar:
+    x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+    nx = [996, 668, 295, 190, 176, 172, 167, 159, 154, 147, 105, 22, 0];
 
+    //Agregamos 12 filas a la tabla:
+    for (var i = 0; i < 12; i++) {
+        agregar_fila();
+        
+    }
+
+    
+    //Hacemos los cálculos:
+    calcular_lx()
+    calcular_dx()
+    calcular_qx()
+    calcular_Lx()
+    calcular_Tx()
+    calcular_ex()
+
+    hacer_grafica();
+    
+
+    // Cargamos los resultados en las celdas NO INPUT de la tabla:
+    cargar_resultados()
+
+    // Cargamos los resultados de las columnas input x y nx:
+    valores_celdas_x = document.getElementsByClassName("input1");
+    valores_celdas_nx = document.getElementsByClassName("input2");
+
+    for (var i = 0; i < valores_celdas_x.length; i++) {
+          valores_celdas_x[i].value = x[i];
+          valores_celdas_nx[i].value = nx[i];
+
+    }
+    
+
+    //Inhabilita el botón "test", terminando con la prueba. Al limpiar la tabla se vuelve a habilitar.
+    document.getElementById("boton_test").disabled = true; 
 
 }
 
