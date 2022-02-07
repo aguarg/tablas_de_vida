@@ -1,5 +1,5 @@
 HACER
-El botón "limpiar tabla" solo funciona bien si limpio la tabla después de hacer un test. De otra forma tira toda clase de alerts.
+
 
 
 - darle estilo. Pero esto al final, cuando todo lo demás funcione bien.

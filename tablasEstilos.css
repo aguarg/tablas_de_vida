@@ -1,3 +1,31 @@
+* {
+  margin: : 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+
+body {
+  background-color: palegreen;
+  display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 10% 50px auto 50px;
+    justify-content: space-between;
+    
+    grid-gap: 10px;
+     
+}
+
+
+
+
+header {
+  background-color: yellow;
+  grid-column: 1 / 3;
+  grid-row: 1 / 2;
+  
+  
+}
 
 h1 {
 
@@ -6,50 +34,90 @@ h1 {
 
 
 
+/* Contenedor de los botones superiores */
+.cont_botones_app {
+  background-color: blue;
+  padding: 15px;
+  height: 50px;
 
-/*TABLA*/
-table, td {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+  
+    
+}
+
+
+
+/* Tabla */
+table {
   border:1px solid gray;
   border-collapse: collapse;
   padding: 10px;
-  margin: 10px;
 
+  grid-column: 1 / 2;
+  grid-row: 3 / 4;
+  
+
+ 
 }
 
+
+/* Los inputs */
+input {
+  width: 40px;
+}
+
+/* Cada una de las celdas */
 td {
   width: 30px;
+  border:1px solid gray;
+  border-collapse: collapse;
+  padding: 10px;
 }
 
+
+/* La primer fila de la tabla, que funciona como encabezado */
 th {
   background-color: darkgrey;
 }
 
+
+/* Cada fila */
 tr:nth-child(even) {
   background-color: #dddddd;
 }
 
 
 
-
-/*CONTENEDOR BOTONES DE LA APP*/
-.cont_botones_app {
-  background-color: blue;
-  padding: 15px;
-  margin: 15px;
-}
-
-
-
-/*CONTENEDOR BOTONES DE LA TABLA*/
+/* Contenedor de los botones inferiores de la tabla */
 .cont_botones_tabla {
+  background-color: pink;
   padding: 15px;
-  margin: 15px;  
+  height: 50px;
+  grid-column: 1 / 2;
+  grid-row: 4 / 5;
+
+  
+    
 
 }
 
 
-
-/*INPUTS*/
-input {
-  width: 30px;
+.titulo_del_grafico {
+  color: blue;
+  
 }
+
+canvas {
+  background-color: white;
+  width:100%;
+  max-width:600px;
+  padding: 10px;
+  grid-column: 2 / 3;
+  grid-row: 2 / 5;
+  
+  
+}
+
+
+
