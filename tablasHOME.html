@@ -22,23 +22,26 @@
 
 <body>
     
-    <!--Encabezado-->
+<!--Encabezado h1 y el h3-->
     <header>
-        <h1>Cálculo de tablas de vida</h1>
-        <h3>Explicacion breve de que mierda hace esto</h3>
+        <h1>TABLAS DE VIDA</h1>
+        <h3>Técnicas Demográficas: Cálculo de variables de tablas de vida para el estudio de poblaciones.</h3>
     </header>
 
-    <!--Contenedor de los botones superiores-->
+    
+<!--Contenedor de los botones superiores-->
     <div class="cont_botones_app">
         <button onclick="calcular()">Calcular</button>
         <button onclick="limpiar_datos()">Limpiar tabla</button>
         <button onclick="test()" id="boton_test">Test</button>
-
     </div>
+    
 
 
-    <!--Tabla: contiene todas las filas y las columnas-->
+<!--Tabla: contiene todas las filas y las columnas-->
     <table id="tabla">
+    
+      <!--tr: cada fila de la tabla; td: cada celda de la tabla-->  
       <tr>
         <th>x</th>
         <th>nx</th> <!--th es table header-->
@@ -61,28 +64,23 @@
         <td class="celda ex"></td>
       </tr>
       
-      
-
-      
     </table> 
 
 
-    <!--Contenedor de los botones inferiores de la tabla-->
+<!--Contenedor de los botones inferiores de la tabla-->
     <div class="cont_botones_tabla">
         <button onclick="agregar_fila()">Agregar fila</button>
         <button onclick="borrar_fila()">Borrar fila</button>
     </div>
 
 
-    <!--Div que contiene el título de la gráfica y la gráfica-->
+    
+<!--Div que contiene el título de la gráfica y la gráfica-->
     <div class="contenedor_del_grafico">
-        <h3>Número de supervivientes Vs. Intervalos</h3>
+        <h3 class="titulo_del_grafico">Número de supervivientes Vs. Intervalos</h3>
         
         <!--Gráfica-->
-        <canvas id="myChart" 
-            style="width:100%;
-            max-width:600px";
-        >
+        <canvas id="myChart">
             
 
         </canvas>

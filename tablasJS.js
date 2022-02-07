@@ -154,7 +154,7 @@ function limpiar_datos(){
     
     
 
-    //deja la gráfica vacía, solo los ejes:
+    //deja la gráfica vacía, solo los ejes, porque trata de crearla con arreglos vacíos:
     hacer_grafica();
 
     //Habilita el botón test, por si hicieron click en "test", que deshabilita el botón:
