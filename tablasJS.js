@@ -3,7 +3,7 @@
                             ÍNDICE / INDEX
 =========================================================================
 1- FUNCIONES LINKEADAS A LOS BOTONES / FUNCTIONS LINKED TO BUTTONS:
-    1.1- Función que agrega filas a la tabla / Function that add rows to the table.
+    1.1- Función que agrega filas a la tabla / Function that adds rows to the table.
     1.2- Función que borra filas de la tabla / Function that delets rows from the table.
     1.3- Función para limpiar la tabla / Function that resets the whole table.
 

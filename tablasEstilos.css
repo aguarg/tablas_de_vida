@@ -6,44 +6,61 @@
 
 
 body {
-  background-color: palegreen;
+  background-color: #cfcfcf;
   display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 10% 50px auto 50px;
     justify-content: space-between;
-    
-    grid-gap: 10px;
-     
+    grid-column-gap: 15px;
+
+
 }
 
 
 
 
 header {
-  background-color: yellow;
+  background-color: ivory;
   grid-column: 1 / 3;
   grid-row: 1 / 2;
+  margin-bottom: 15px;
   
   
 }
 
 h1 {
-
-	color: red;
+  
+  font-size: 50px;
+	color: #3d44a6;
+  padding-left: 10px;
 }
 
+
+h3 {
+  margin-left: 10px;
+}
 
 
 /* Contenedor de los botones superiores */
 .cont_botones_app {
-  background-color: blue;
+  background-color: ivory;
   padding: 15px;
-  height: 50px;
-
+  
   grid-column: 1 / 2;
   grid-row: 2 / 3;
+
+}
+
+
+button {
+  background-color: #323680;
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 15px;
   
-    
 }
 
 
@@ -53,7 +70,6 @@ table {
   border:1px solid gray;
   border-collapse: collapse;
   padding: 10px;
-
   grid-column: 1 / 2;
   grid-row: 3 / 4;
   
@@ -91,7 +107,7 @@ tr:nth-child(even) {
 
 /* Contenedor de los botones inferiores de la tabla */
 .cont_botones_tabla {
-  background-color: pink;
+  background-color: ivory;
   padding: 15px;
   height: 50px;
   grid-column: 1 / 2;
@@ -103,16 +119,23 @@ tr:nth-child(even) {
 }
 
 
+.contenedor_del_grafico {
+  background-color: ivory;
+}
+
 .titulo_del_grafico {
-  color: blue;
+  color: #3d44a6;
+  background-color: ivory;
+  padding-left: 10px;
+  height: 10px;
   
 }
 
 canvas {
   background-color: white;
   width:100%;
-  max-width:600px;
-  padding: 10px;
+  max-width:100%;
+  padding: 10px 10px 30px 10px;
   grid-column: 2 / 3;
   grid-row: 2 / 5;
   
