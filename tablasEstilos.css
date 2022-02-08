@@ -26,19 +26,19 @@ header {
   grid-column: 1 / 3;
   grid-row: 1 / 2;
   margin-bottom: 15px;
-  height: auto;
-
+  
 }
 
 
 
 h1 {
   
-  font-size: 60px;
+  font-size: 50px;
 	color: #3d44a6;
   padding-left: 10px;
   height: 40px;
   font-family: 'Roboto Mono', monospace;
+  height: 20%;
 }
 
 
@@ -78,6 +78,12 @@ button:hover {
 }
 
 
+/* El ícono "i" del botón Test. Viene como CDN de Font Awesome */
+i {
+  margin-left: 10px;
+}
+
+
 
 /* Tabla */
 table {
@@ -92,7 +98,7 @@ table {
 }
 
 
-/* Los inputs */
+/* Inputs */
 input {
   width: 40px;
 }
@@ -112,7 +118,7 @@ th {
 }
 
 
-/* Cada fila */
+/* Le dá un color gris claro a las celdas pares */
 tr:nth-child(even) {
   background-color: #dddddd;
 }
@@ -132,12 +138,14 @@ tr:nth-child(even) {
 
 }
 
-
+/*Contenedor del gŕafico y del título*/
 .contenedor_del_grafico {
   background-color: ivory;
   height: 100%;
 }
 
+
+/*Contenedor del título del gŕafico*/
 .titulo_del_grafico {
   color: #3d44a6;
   background-color: ivory;
@@ -145,6 +153,8 @@ tr:nth-child(even) {
   height: 30px;
 }
 
+
+/* El gráfico */
 canvas {
   background-color: white;
   width:100%;
@@ -178,6 +188,7 @@ canvas {
   top: 150%;
   left: 10%;
   margin-left: -60px;
+
 }
 
 .tooltip .tooltiptext::after {
@@ -189,10 +200,12 @@ canvas {
   border-width: 5px;
   border-style: solid;
   border-color: transparent transparent black transparent;
+
 }
 
 .tooltip:hover .tooltiptext {
   visibility: visible;
+  transition-delay: 0.3s;
 }
 
 
