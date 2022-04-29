@@ -1,3 +1,5 @@
+https://github.com/aguarg/tablas_de_vida/blob/main/tablasHOME.html
+
 # Tablas de Vida
 App para el cálculo de tablas de vida usadas en el estudio de poblaciones.
 
